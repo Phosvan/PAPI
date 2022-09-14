@@ -54,10 +54,10 @@ def removewidgets():
         root_frame.destroy()
 
 
-createWidgetButton = tk.Button(root, height=3, text="More", command=createwidgets)
+createWidgetButton = tk.Button(root, height=3, text="Less", command=removewidgets)
 createWidgetButton.pack(side="bottom", fill="x")
 
-createWidgetButton = tk.Button(root, height=3, text="Less", command=removewidgets)
+createWidgetButton = tk.Button(root, height=3, text="More", command=createwidgets)
 createWidgetButton.pack(side="bottom", fill="x")
 
 
