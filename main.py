@@ -1,39 +1,68 @@
-from tkinter import *
-from tkinter import ttk
+import tkinter as tk
 
-def counterMinus():
-    if counter.get() > 0:
-        counter.set(counter.get()-1)
+class WidgetSet():
+    def __init__(self) -> None:
+        self.cnt = tk.IntVar()
 
-def counterPlus():
-    counter.set(counter.get()+1)
+        self.frame = tk.Frame(root,borderwidth=0, relief="groove")
+        self.frame.pack(side="top", fill="x")
 
-def outputData():
-    print(f"{text_input.get()} : {counter.get()}")
+        self.entry = tk.Entry(self.frame ,width=30, font=('Arial 16'), bg="white")
+        self.entry.pack(side="left", padx=(100,0))
 
-root = Tk()
-root.geometry("500x500")
-counter = IntVar()
-input_str = StringVar()
+        self.inner_frame = tk.Frame(self.frame, borderwidth=0, relief="groove")
+        self.inner_frame.pack(side="right", fill="x")
+        
+        self.button_minus = tk.Button(self.inner_frame, width=2, height= 2, text="-", command=self.Minus)
+        self.button_minus.pack(side="left", )
 
-counter_label = Label(root, textvariable=counter)
-counter_label.place(x=365,y=20)
+        self.label = tk.Label(self.inner_frame, width=5, textvariable=self.cnt)
+        self.label.pack(side="left")
 
-minus_button = Button(root, text="-", command=counterMinus)
-minus_button.place(x=300, y=15)
+        self.button_plus = tk.Button(self.inner_frame, width=2, height= 2, text="+", command=self.Plus)
+        self.button_plus.pack(side="left", padx=(0,175))
 
-plus_button = Button(root, text="+", command=counterPlus)
-plus_button.place(x=400, y=15)
+    def Minus(self):
+        if self.cnt.get() > 0:
+            self.cnt.set(self.cnt.get()-1)
 
-plus_button = Button(root, text="Done", command=outputData)
-plus_button.place(x=400, y=400)
+    def Plus(self):
+        if self.cnt.get() < 99:
+            self.cnt.set(self.cnt.get()+1)
 
-text_input = Entry(root, text="Enter A Pill")
-text_input.place(x=10, y=10)
+root = tk.Tk()
+root.geometry("800x480")
+
+obj=[WidgetSet()]
+
+def createwidgets():
+    if len(obj) < 8:
+        obj.append(WidgetSet())
+
+def removewidgets():
+    if len(obj) > 0:
+        def frame_deleter(root_frame):
+            slaves = root_frame.winfo_children()
+            for widget in slaves:
+                if widget is tk.Frame:
+                    frame_deleter(widget)
+                widget.destroy()
+
+        widget_set = obj.pop(len(obj)-1)
+        root_frame = widget_set.frame
+        frame_deleter(root_frame)
+        root_frame.destroy()
+
+
+createWidgetButton = tk.Button(root, height=3, text="More", command=createwidgets)
+createWidgetButton.pack(side="bottom", fill="x")
+
+createWidgetButton = tk.Button(root, height=3, text="Less", command=removewidgets)
+createWidgetButton.pack(side="bottom", fill="x")
+
+
 
 root.mainloop()
-
-
 
 
 
