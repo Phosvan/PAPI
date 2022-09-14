@@ -1,11 +1,12 @@
 import tkinter as tk
 
+# A set of widgets, said widgets are what show when 
 class WidgetSet():
     def __init__(self) -> None:
         self.cnt = tk.IntVar()
 
         self.frame = tk.Frame(root,borderwidth=0, relief="groove")
-        self.frame.pack(side="top", fill="x")
+        self.frame.pack(side="top", fill="x", pady=(12, 0))
 
         self.entry = tk.Entry(self.frame ,width=30, font=('Arial 16'), bg="white")
         self.entry.pack(side="left", padx=(100,0))
@@ -13,13 +14,13 @@ class WidgetSet():
         self.inner_frame = tk.Frame(self.frame, borderwidth=0, relief="groove")
         self.inner_frame.pack(side="right", fill="x")
         
-        self.button_minus = tk.Button(self.inner_frame, width=2, height= 2, text="-", command=self.Minus)
+        self.button_minus = tk.Button(self.inner_frame, width=1, height= 1, text="-", command=self.Minus)
         self.button_minus.pack(side="left", )
 
         self.label = tk.Label(self.inner_frame, width=5, textvariable=self.cnt)
         self.label.pack(side="left")
 
-        self.button_plus = tk.Button(self.inner_frame, width=2, height= 2, text="+", command=self.Plus)
+        self.button_plus = tk.Button(self.inner_frame, width=1, height= 1, text="+", command=self.Plus)
         self.button_plus.pack(side="left", padx=(0,175))
 
     def Minus(self):
@@ -30,14 +31,10 @@ class WidgetSet():
         if self.cnt.get() < 99:
             self.cnt.set(self.cnt.get()+1)
 
-root = tk.Tk()
-root.geometry("800x480")
-
-obj=[WidgetSet()]
-
 def output_data():
     for wSet in obj:
-        print(f"{wSet.entry.get()},{wSet.cnt.get()}")
+        if wSet.entry.get() != "" and wSet.cnt.get() != 0:
+            print(f"{wSet.entry.get()},{wSet.cnt.get()}")
 
 def createwidgets():
     if len(obj) < 8:
@@ -57,6 +54,10 @@ def removewidgets():
         frame_deleter(root_frame)
         root_frame.destroy()
 
+root = tk.Tk()
+root.geometry("800x480")
+
+obj=[WidgetSet()]
 
 createWidgetButton = tk.Button(root, height=2, text="Done", command=output_data)
 createWidgetButton.pack(side="bottom", fill="x")
