@@ -40,7 +40,7 @@ def createwidgets():
         obj.append(WidgetSet())
 
 def removewidgets():
-    if len(obj) > 0:
+    if len(obj) > 1:
         def frame_deleter(root_frame):
             slaves = root_frame.winfo_children()
             for widget in slaves:
