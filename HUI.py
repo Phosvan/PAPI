@@ -35,6 +35,10 @@ root.geometry("800x480")
 
 obj=[WidgetSet()]
 
+def output_data():
+    for wSet in obj:
+        print(f"{wSet.entry.get()},{wSet.cnt.get()}")
+
 def createwidgets():
     if len(obj) < 8:
         obj.append(WidgetSet())
@@ -54,11 +58,15 @@ def removewidgets():
         root_frame.destroy()
 
 
-createWidgetButton = tk.Button(root, height=3, text="Less", command=removewidgets)
+createWidgetButton = tk.Button(root, height=2, text="Done", command=output_data)
 createWidgetButton.pack(side="bottom", fill="x")
 
-createWidgetButton = tk.Button(root, height=3, text="More", command=createwidgets)
+createWidgetButton = tk.Button(root, height=2, text="Less", command=removewidgets)
 createWidgetButton.pack(side="bottom", fill="x")
+
+createWidgetButton = tk.Button(root, height=2, text="More", command=createwidgets)
+createWidgetButton.pack(side="bottom", fill="x")
+
 
 
 
