@@ -1,7 +1,4 @@
-from cProfile import label
 import tkinter as tk
-
-# A set of widgets, said widgets are what show when 
 class WidgetSet():
     def __init__(self, pair) -> None:
         self.pill_name = pair[0]
@@ -29,57 +26,49 @@ class WidgetSet():
 
 def output_data(packet):
     print(packet)
+    clean_widgets()
 
 def createwidgets(pair):
     if len(obj) < 8:
         obj.append(WidgetSet(pair))
 
 def clean_widgets():
-    pass
+    obj.pop(0).destroy()
+    for widgetset in obj:
+        removewidgets(widgetset)
 
-def removewidgets():
-    if len(obj) > 1:
-        def frame_deleter(root_frame):
-            slaves = root_frame.winfo_children()
-            for widget in slaves:
-                if widget is tk.Frame:
-                    frame_deleter(widget)
-                widget.destroy()
+def removewidgets(widgetset):
+    slaves = widgetset.frame.winfo_children()
+    for widget in slaves:
+        if widget is tk.Frame:
+            removewidgets(widget)
+        widget.destroy()
 
-        widget_set = obj.pop(len(obj)-1)
-        root_frame = widget_set.frame
-        frame_deleter(root_frame)
-        root_frame.destroy()
-
-def prepare_packet(packet):
-    string_arr = []
-    for element in packet:
-        if type(element) == list:
-            element = prepare_packet(element)
-        string_arr.append(element)
-    
-    return ",".join(string_arr)
+def flatten(l):
+  out = []
+  for item in l:
+    if isinstance(item, (list, tuple)):
+      out.extend(flatten(item))
+    else:
+      out.append(item)
+  return out
 
 obj = []
 root = tk.Tk()
 def hui_main(packet):
-
-
     root.geometry("800x480")
 
     name_label = tk.Label(root, text=packet[0])
     name_label.pack(side="top")
+    obj.append(name_label)
 
     for pair in packet[1::]:
         createwidgets(pair)
 
-    string_packet = prepare_packet(packet)
+    string_packet = ','.join(flatten(packet))
 
     createWidgetButton = tk.Button(root, height=2, text="Done", command=lambda: output_data(string_packet))
     createWidgetButton.pack(side="bottom", fill="x")
-
-
-
 
     root.mainloop()
 
