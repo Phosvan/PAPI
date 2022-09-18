@@ -1,6 +1,7 @@
 import tkinter as tk
 
 class WidgetSet():
+    sets = []
     def __init__(self, pair, root) -> None:
         self.root = root
         self.pill_name = pair[0]
@@ -17,7 +18,14 @@ class WidgetSet():
         
         self.label = tk.Label(self.inner_frame, width=5,height=2, text=self.pill_amount, bg="white")
         self.label.pack(side="left", padx=(0,250))
-        
+
+    def destroy(self):
+        self.frame.destroy()
+        self.label.destroy()
+        self.entry.destroy()
+        self.inner_frame.destroy()
+
+       
     # Unneccessary since lack of changing IntVar labels. 
     # def Minus(self):
     #     if self.cnt.get() > 0:
