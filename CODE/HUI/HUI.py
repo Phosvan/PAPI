@@ -19,27 +19,13 @@ def hui_main():
 #TODO To be determined; how to format and send data from the HUI
 def output_data(prescription):
     print(prescription)
-    clean_widgets()
+    for widget in WidgetSet.sets:
+        widget.destroy()
 
 # Creates a widgetset object and adds to the global list.
 def createwidgets(prescription_pair):
     if len(widget_sets) < 8:
-        widget_sets.append(WidgetSet(prescription_pair, root))
-
-# Destroys an entire widgetset object. calling destroy() is neccessary for the gui stuff to be removed.
-def clean_widgets():
-
-    # Helper function for clean_widgets, recursively deletes the tkinter objects within the widgetset object.
-    def removewidgets(widgetset):
-        slaves = widgetset.frame.winfo_children()
-        for widget in slaves:
-            if widget is tk.Frame:
-                removewidgets(widget)
-            widget.destroy()
-
-    widget_sets.pop(0).destroy()
-    for widget_set in widget_sets:
-        removewidgets(widget_set)
+        WidgetSet.sets.append((WidgetSet(prescription_pair, root)))
 
 # Temp logic on displaying a prescription.
 def display_prescription(prescription):
