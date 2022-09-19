@@ -18,7 +18,7 @@ class WidgetSet():
         
         self.label = tk.Label(self.inner_frame, width=5,height=2, text=self.pill_amount, bg="white")
         self.label.pack(side="left", padx=(0,250))
-
+    # Destructor
     def destroy(self):
         self.frame.destroy()
         self.label.destroy()
