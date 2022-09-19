@@ -1,20 +1,15 @@
 import tkinter as tk
 from libs.qr_reader import reader
-from libs import util
-from libs.WidgetSet import WidgetSet
-
-widget_sets = [] #TODO Remove global list and integrate into logic, class maybe?
-
-root = tk.Tk()
-root.geometry("800x480") # Raspberry Pi TouchScreen 7in Resolution
+from libs import util, WidgetSet
+from libs.Window import Window
 
 def hui_main():
-
+    window = Window()
     #Parsing the qr code and converting to this format to create a WidgetSet
     display_prescription(["aby", ["bofa","3"]])
 
     #TODO Work this logic. Need flow control.
-    root.mainloop()
+    window.root.mainloop()
 
 #TODO To be determined; how to format and send data from the HUI
 def output_data(prescription):
