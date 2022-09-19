@@ -24,13 +24,3 @@ class WidgetSet():
         self.label.destroy()
         self.entry.destroy()
         self.inner_frame.destroy()
-
-       
-    # Unneccessary since lack of changing IntVar labels. 
-    # def Minus(self):
-    #     if self.cnt.get() > 0:
-    #         self.cnt.set(self.cnt.get()-1)
-
-    # def Plus(self):
-    #     if self.cnt.get() < 99:
-    #         self.cnt.set(self.cnt.get()+1)
