@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class WidgetSet():
-    sets = []
+    widget_sets = []
     def __init__(self, pair, root) -> None:
         self.root = root
         self.pill_name = pair[0]
