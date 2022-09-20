@@ -1,5 +1,7 @@
 import tkinter as tk
 from libs.WidgetSet import WidgetSet
+from libs.qr_reader import reader
+import concurrent.futures
 
 class Controller(tk.Tk):
 
@@ -32,16 +34,14 @@ class Controller(tk.Tk):
 
 
 class ScanPage(tk.Frame):
-
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text="Scan Page")
         label.pack(side="top", fill="x", pady=10)
 
-        button1 = tk.Button(self, text="Go to Display",
-                            command=lambda: controller.show_frame("DisplayPage"))
-        button1.pack()
+        label1 = tk.Label(self, text="Please scan your prescription.")
+        label1.pack()
 
 
 class DisplayPage(tk.Frame):
