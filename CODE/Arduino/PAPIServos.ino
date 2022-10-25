@@ -15,6 +15,8 @@ Servo Hop11;
 Servo Hop12;
 
 char PiInput;                                                       // Input is expected to be a character 
+int turnSpeed = 1300;
+int turnStop = 1500;
 
 void setup() {
   // put your setup code here, to run once:
@@ -44,101 +46,101 @@ void loop() {
 
     if (PiInput == '1'){                                            // If one is typed, turn the servo motor 1 to dispense one pill
       Serial.println("Dispense pill 1");                            // and so on for the others
-      Hop1.writeMicroseconds(1435);
+      Hop1.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop1.writeMicroseconds(1500);
+      Hop1.writeMicroseconds(turnStop);
     }
   
     else if (PiInput == '2'){
       Serial.println("Dispense pill 2");
-      Hop2.writeMicroseconds(1435);
+      Hop2.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop2.writeMicroseconds(1500);
+      Hop2.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == '3'){
       Serial.println("Dispense pill 3");
-      Hop3.writeMicroseconds(1435);
+      Hop3.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop3.writeMicroseconds(1500);
+      Hop3.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == '4'){
       Serial.println("Dispense pill 4");
-      Hop4.writeMicroseconds(1435);
+      Hop4.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop4.writeMicroseconds(1500);
+      Hop4.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == '5'){
       Serial.println("Dispense pill 5");
-      Hop5.writeMicroseconds(1435);
+      Hop5.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop5.writeMicroseconds(1500);
+      Hop5.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == '6'){
       Serial.println("Dispense pill 6");
-      Hop6.writeMicroseconds(1435);
+      Hop6.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop6.writeMicroseconds(1500);
+      Hop6.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == '7'){
       Serial.println("Dispense pill 7");
-      Hop7.writeMicroseconds(1435);
+      Hop7.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop7.writeMicroseconds(1500);
+      Hop7.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == '8'){
       Serial.println("Dispense pill 8");
-      Hop8.writeMicroseconds(1435);
+      Hop8.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop8.writeMicroseconds(1500);
+      Hop8.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == '9'){
       Serial.println("Dispense pill 9");
-      Hop9.writeMicroseconds(1435);
+      Hop9.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop9.writeMicroseconds(1500);
+      Hop9.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == 't'){
       Serial.println("Dispense pill 10");
-      Hop10.writeMicroseconds(1435);
+      Hop10.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop10.writeMicroseconds(1500);
+      Hop10.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == 'e'){
       Serial.println("Dispense pill 11");
-      Hop11.writeMicroseconds(1435);
+      Hop11.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop11.writeMicroseconds(1500);
+      Hop11.writeMicroseconds(turnStop);
     }
 
     else if (PiInput == 't'){
       Serial.println("Dispense pill 12");
-      Hop12.writeMicroseconds(1435);
+      Hop12.writeMicroseconds(turnSpeed);
       delay(460);
-      Hop12.writeMicroseconds(1500);
+      Hop12.writeMicroseconds(turnStop);
     }
 
     else {                                                         // When there is no input, make sure servos are not moving 
-      Hop1.writeMicroseconds(1500);
-      Hop2.writeMicroseconds(1500);
-      Hop3.writeMicroseconds(1500);
-      Hop4.writeMicroseconds(1500);
-      Hop5.writeMicroseconds(1500);
-      Hop6.writeMicroseconds(1500);
-      Hop7.writeMicroseconds(1500);
-      Hop8.writeMicroseconds(1500);
-      Hop9.writeMicroseconds(1500);
-      Hop10.writeMicroseconds(1500);
-      Hop11.writeMicroseconds(1500);
-      Hop12.writeMicroseconds(1500);
+      Hop1.writeMicroseconds(turnStop);
+      Hop2.writeMicroseconds(turnStop);
+      Hop3.writeMicroseconds(turnStop);
+      Hop4.writeMicroseconds(turnStop);
+      Hop5.writeMicroseconds(turnStop);
+      Hop6.writeMicroseconds(turnStop);
+      Hop7.writeMicroseconds(turnStop);
+      Hop8.writeMicroseconds(turnStop);
+      Hop9.writeMicroseconds(turnStop);
+      Hop10.writeMicroseconds(turnStop);
+      Hop11.writeMicroseconds(turnStop);
+      Hop12.writeMicroseconds(turnStop);
     }
   }
 
