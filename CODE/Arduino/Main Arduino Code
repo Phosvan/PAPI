@@ -1,0 +1,327 @@
+
+#include <Servo.h>                                                  // Need to add library for the servo motors 
+//
+//class IRObject {
+//  public:
+//    int a,b,c;
+//    int IR;
+//
+//    IRObject(int IR){
+//      
+//    }
+//}
+
+Servo Hop1;                                                         // Designate these as servos
+Servo Hop2;
+Servo Hop3;
+Servo Hop4;
+Servo Hop5;
+Servo Hop6;
+Servo Hop7;
+Servo Hop8;
+Servo Hop9;
+Servo Hop10;
+Servo Hop11;
+Servo Hop12;
+
+char PiInput;                                                       // Input is expected to be a character 
+int turnSpeed = 1300;                                               // How fast to turn servo
+int turnStop = 1500;                                                // Value to stop servo, some servos are picky about, may need to make one for each servo if they are being weird
+int aIR1,aIR2,aIR3,aIR4,aIR5,aIR6,aIR7,aIR8,aIR9,aIR10,aIR11,aIR12,bIR1,bIR2,bIR3,bIR4,bIR5,bIR6,bIR7,bIR8,bIR9,bIR10,bIR11,bIR12,cIR1,cIR2,cIR3,cIR4,cIR5,cIR6,cIR7,cIR8,cIR9,cIR10,cIR11,cIR12;
+                                                                    // ^don't worry about this crap, it works
+
+int IRDigital = 16;                                                
+int drop = -200;                                                    // value Ir sensors see when candy drops, change when we get new power source
+
+void setup() {
+  // put your setup code here, to run once:
+
+  Serial.begin(9600);                                               // Start the Serial monitor on baud 9600
+
+  Hop1.attach(2);                                                   // Set pins on Arduino for each Servo
+  Hop2.attach(3);
+  Hop3.attach(4);
+  Hop4.attach(5);
+  Hop5.attach(6);
+  Hop6.attach(7);
+  Hop7.attach(8);
+  Hop8.attach(9);
+  Hop9.attach(10);
+  Hop10.attach(11);
+  Hop11.attach(12);
+  Hop12.attach(13);
+
+  pinMode(IRDigital, OUTPUT);
+}
+
+void loop() {
+
+    digitalWrite(IRDigital,HIGH);                                   // Sequence to read all IR sensors outside of Serial comunication 
+    delayMicroseconds(500);
+    
+    aIR1 = analogRead(A0);
+    aIR2 = analogRead(A1);
+    aIR3 = analogRead(A2);
+    aIR4 = analogRead(A3);
+    aIR5 = analogRead(A4);
+    aIR6 = analogRead(A5);
+    aIR7 = analogRead(A6);
+    aIR8 = analogRead(A7);
+    aIR9 = analogRead(A8);
+    aIR10 = analogRead(A9);
+    aIR11 = analogRead(A10);
+    aIR12 = analogRead(A11);
+    
+    digitalWrite(IRDigital,LOW);
+    delayMicroseconds(500);
+    
+    bIR1 = analogRead(A0);
+    bIR2 = analogRead(A1);
+    bIR3 = analogRead(A2);
+    bIR4 = analogRead(A3);
+    bIR5 = analogRead(A4);
+    bIR6 = analogRead(A5);
+    bIR7 = analogRead(A6);
+    bIR8 = analogRead(A7);
+    bIR9 = analogRead(A8);
+    bIR10 = analogRead(A9);
+    bIR11 = analogRead(A10);
+    bIR12 = analogRead(A11);
+
+    cIR1 = aIR1-bIR1;                                               // Math for IR values 
+    cIR2 = aIR2-bIR2;
+    cIR3 = aIR3-bIR3;
+    cIR4 = aIR4-bIR4;
+    cIR5 = aIR5-bIR5;
+    cIR6 = aIR6-bIR6;
+    cIR7 = aIR7-bIR7;
+    cIR8 = aIR8-bIR8;
+    cIR9 = aIR9-bIR9;
+    cIR10 = aIR10-bIR10;
+    cIR11 = aIR11-bIR11;
+    cIR12 = aIR12-bIR12;
+
+  while (Serial.available()){                                       // Only do this when the moitor is open
+    PiInput = Serial.read();                                        // Set the value of PiInput to whatever is typed in the monitor
+
+    if (PiInput == '1'){                                            // If one is typed, turn the servo motor 1 to dispense one pill
+      Serial.println("Dispense pill 1");                            // and so on for the others
+      
+     while (cIR1 > drop){
+       Hop1.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH);                                // Keep reading IR sensor within loop, don't stop servo till a drop is sensed 
+       delayMicroseconds(500);
+       aIR1 = analogRead(A0);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR1 = analogRead(A0);
+       cIR1 = aIR1-bIR1;
+       Serial.println(cIR1);
+     }
+      Hop1.writeMicroseconds(turnStop);
+    }
+  
+    else if (PiInput == '2'){
+      Serial.println("Dispense pill 2");
+
+      while (cIR2 > drop){
+       Hop2.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR2 = analogRead(A1);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR2 = analogRead(A1);
+       cIR2 = aIR2-bIR2;
+       Serial.println(cIR2);
+      }
+      Hop2.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == '3'){
+      Serial.println("Dispense pill 3");
+      
+      while (cIR3 > drop){
+       Hop3.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR3 = analogRead(A2);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR3 = analogRead(A2);
+       cIR3 = aIR3-bIR3;
+       Serial.println(cIR3);
+      }
+      Hop3.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == '4'){
+      Serial.println("Dispense pill 4");
+
+      while (cIR4 > drop){
+       Hop4.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR4 = analogRead(A3);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR2 = analogRead(A3);
+       cIR4 = aIR4-bIR4;
+       Serial.println(cIR4);
+      }
+      Hop4.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == '5'){
+      Serial.println("Dispense pill 5");
+
+      while (cIR5 > drop){
+       Hop5.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR5 = analogRead(A4);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR5 = analogRead(A4);
+       cIR5 = aIR5-bIR5;
+       Serial.println(cIR5);
+      }
+      Hop5.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == '6'){
+      Serial.println("Dispense pill 6");
+
+      while (cIR6 > drop){
+       Hop6.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR6 = analogRead(A5);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR6 = analogRead(A5);
+       cIR6 = aIR6-bIR6;
+       Serial.println(cIR6);
+      }
+      Hop6.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == '7'){
+      Serial.println("Dispense pill 7");
+      
+      while (cIR7 > drop){
+       Hop7.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR7 = analogRead(A6);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR7 = analogRead(A6);
+       cIR7 = aIR7-bIR7;
+       Serial.println(cIR7);
+      }
+      Hop7.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == '8'){
+      Serial.println("Dispense pill 8");
+
+      while (cIR8 > drop){
+       Hop8.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR8 = analogRead(A7);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR8 = analogRead(A7);
+       cIR8 = aIR8-bIR8;
+       Serial.println(cIR8);
+      }
+      Hop8.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == '9'){
+      Serial.println("Dispense pill 9");
+
+      while (cIR9 > drop){
+       Hop9.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR9 = analogRead(A8);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR9 = analogRead(A8);
+       cIR9 = aIR9-bIR9;
+       Serial.println(cIR9);
+      }
+      Hop9.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == 't'){
+      Serial.println("Dispense pill 10");
+
+      while (cIR10 > drop){
+       Hop10.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR10 = analogRead(A9);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR10 = analogRead(A9);
+       cIR10 = aIR10-bIR10;
+       Serial.println(cIR10);
+      }
+      Hop10.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == 'e'){
+      Serial.println("Dispense pill 11");
+
+      while (cIR11 > drop){
+       Hop11.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR11 = analogRead(A10);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR11 = analogRead(A10);
+       cIR11 = aIR11-bIR11;
+       Serial.println(cIR11);
+      }
+      Hop11.writeMicroseconds(turnStop);
+    }
+
+    else if (PiInput == 't'){
+      Serial.println("Dispense pill 12");
+
+      while (cIR12 > drop){
+       Hop12.writeMicroseconds(turnSpeed);
+       digitalWrite(IRDigital,HIGH); 
+       delayMicroseconds(500);
+       aIR12 = analogRead(A11);
+       digitalWrite(IRDigital,LOW);
+       delayMicroseconds(500);
+       bIR12 = analogRead(A11);
+       cIR12 = aIR12-bIR12;
+       Serial.println(cIR12);
+      }
+      Hop12.writeMicroseconds(turnStop);
+    }
+
+    else {                                                         // When there is no input, make sure servos are not moving 
+      Hop1.writeMicroseconds(turnStop);
+      Hop2.writeMicroseconds(turnStop);
+      Hop3.writeMicroseconds(turnStop);
+      Hop4.writeMicroseconds(turnStop);
+      Hop5.writeMicroseconds(turnStop);
+      Hop6.writeMicroseconds(turnStop);
+      Hop7.writeMicroseconds(turnStop);
+      Hop8.writeMicroseconds(turnStop);
+      Hop9.writeMicroseconds(turnStop);
+      Hop10.writeMicroseconds(turnStop);
+      Hop11.writeMicroseconds(turnStop);
+      Hop12.writeMicroseconds(turnStop);
+    }
+  }
+
+}
