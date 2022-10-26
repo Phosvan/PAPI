@@ -1,0 +1,40 @@
+/*
+This code is to Remove ambience noise from sensor data.
+IR LED connected to Digital pin: 16
+IR diode connected to analog input:A3
+
+by-Abhilash Patel
+*/
+int a,b,c,d,e,f,g,h,i;
+void setup() 
+{
+Serial.begin(9600);
+pinMode(16,OUTPUT);
+}
+
+void loop() {
+ digitalWrite(16,HIGH);    // Turning ON LED
+ delayMicroseconds(500);  //wait
+ //a=analogRead(A2);        //take reading from photodiode(pin A3) :noise+signal
+ //d=analogRead(A1);
+ g=analogRead(A0);
+ digitalWrite(16,LOW);     //turn Off LED
+ delayMicroseconds(500);  //wait
+ //b=analogRead(A2);        // again take reading from photodiode :noise
+ //e=analogRead(A1);
+ h=analogRead(A0);
+c=a-b;                    //taking differnce:[ (noise+signal)-(noise)] just signal
+f=d-e;
+i=g-h;
+
+//Serial.print(a);         //noise+signal
+//Serial.print("\t");
+//Serial.print(b);         //noise
+//Serial.print("\t");
+//Serial.print(c);         // denoised signal
+//Serial.print("        ");
+//Serial.print(f);
+//Serial.print("        ");
+Serial.println(i);
+ 
+}
