@@ -39,7 +39,7 @@ class HUIApp(tk.Tk):
 
 class start(tk.Frame):
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent, bg= "pink")
         self.controller = controller
         label = tk.Label (self, text= "Welcome to PAPI, Please Scan QR")  
         controller.attributes('-fullscreen', True)
