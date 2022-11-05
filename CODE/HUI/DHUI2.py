@@ -13,7 +13,7 @@ class HUIApp(tk.Tk):
         self.frames = {}
         #self.frames['start'] = start(container=self.container, container=self)
 
-        for F in (start, twochoice):
+        for F in (start, twochoice, mm):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -85,6 +85,12 @@ class yes(tk.Tk):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+     
+class mm(tk.Frame):
+     def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent, bg= "#d459de")
+        self.controller = controller
+        #label1 = tk.Label
     
 if __name__ == "__main__":
     app = HUIApp()
