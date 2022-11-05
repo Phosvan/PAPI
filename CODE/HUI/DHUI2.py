@@ -35,7 +35,7 @@ class HUIApp(tk.Tk):
 
         #def create_twochoice(self, page_name, data):
          #self.frames[page_name] = twochoice(parent=self.container, controller=self)
-
+          
 class start(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, bg= "#d459de")
@@ -48,6 +48,7 @@ class start(tk.Frame):
         command= lambda: controller.show_frame("twochoice"))
 
         button1.pack(side="bottom", fill= "x",pady=10) 
+
 
 #class twochoice(tk.Frame):
      #def __init__(self, parent, controller):
@@ -66,18 +67,18 @@ class start(tk.Frame):
 
 class twochoice(tk.Frame):
      def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent, bg= "#d459de")
         self.controller = controller
-        label1 = tk.Label(self, text= "ID#:")
-        label1.pack(side= "top", fill= "x", pady=10)
-        Label2 = tk.Label(self, text= "Name Variable Here")
-        Label2.pack(side= "top", fill= "x", pady=10)
-        button1 = tk.Button(self, text= "Correct Information",
+        label1 = tk.Label(self, text= "ID#:", bg= "#d459de", font= ("Calibri",50), height= 1)
+        label1.pack(side= "top", fill= "x", pady=5)
+        Label2 = tk.Label(self, text= "Name Variable Here",bg= "#d459de", font= ("Calibri", 50), height= 1)
+        Label2.pack(side= "top", fill= "x", pady=5)
+        button1 = tk.Button(self, text= "Correct Information", font= ("Calibri", 20), fg= "green",
         command= lambda: controller.show_frame("start"))
-        button1.pack()
-        button2 = tk.Button(self, text= "Incorrect Information",
+        button1.pack(side= "bottom", fill= "x", pady=5)
+        button2 = tk.Button(self, text= "Incorrect Information", font= ("Calibri", 20), fg= "red",
         command= lambda: controller.show_frame("start"))
-        button2.pack()
+        button2.pack(side= "bottom", fill= "x", pady=5)
 
 
 class yes(tk.Tk):
