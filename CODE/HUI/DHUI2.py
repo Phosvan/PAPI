@@ -40,14 +40,14 @@ class start(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, bg= "#d459de")
         self.controller = controller
-        label = tk.Label (self, text= "Welcome to PAPI, Please Scan QR", width= 200, height= 100, font= ("Comic Sans Ms", 50), bg= "#d459de")    
+        label = tk.Label (self, text= "Welcome to PAPI, Please Scan QR", width= 20, height= 5, font= ("Comic Sans Ms",50), bg= "#d459de")    
         controller.attributes('-fullscreen', True)
         label.pack(side="top", fill= "x", pady=10)   
 
         button1 = tk.Button (self, text= "Go to ID",
         command= lambda: controller.show_frame("twochoice"))
 
-        button1.pack() 
+        button1.pack(side="bottom", fill= "x",pady=10) 
 
 #class twochoice(tk.Frame):
      #def __init__(self, parent, controller):
