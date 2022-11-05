@@ -73,10 +73,10 @@ class twochoice(tk.Frame):
         label1.pack(side= "top", fill= "x", pady=5)
         Label2 = tk.Label(self, text= "Name Variable Here",bg= "#d459de", font= ("Calibri", 50), height= 1)
         Label2.pack(side= "top", fill= "x", pady=5)
-        button1 = tk.Button(self, text= "Correct Information", font= ("Calibri", 20), fg= "green",
+        button1 = tk.Button(self, text= "Correct Information", font= ("Baguet Script", 20), fg= "green",
         command= lambda: controller.show_frame("start"))
         button1.pack(side= "bottom", fill= "x", pady=5)
-        button2 = tk.Button(self, text= "Incorrect Information", font= ("Calibri", 20), fg= "red",
+        button2 = tk.Button(self, text= "Incorrect Information", font= ("Baguet Script", 20), fg= "red",
         command= lambda: controller.show_frame("start"))
         button2.pack(side= "bottom", fill= "x", pady=5)
 
