@@ -36,7 +36,7 @@ class PiController():
        
     def recvLikeArduino(self):
         if self.serialPort.inWaiting() > 0 and self.messageComplete == False or self.listening is True:
-            x = self.serialPort.read().decode("utf-8") # decode needed for Python3
+            x = self.serialPort.read().decode("utf-8", errors='replace') # decode needed for Python3
         
             if self.dataStarted == True:
                 if x != self.endMarker:
@@ -68,7 +68,7 @@ class PiController():
         if len(value) == 0:
             return None
 
-        return value[0].data.decode("utf-8", errors='replace') 
+        return value[0].data.decode("utf-8") 
 
     def scan_input(self):
         if self.debug:
