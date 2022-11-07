@@ -20,7 +20,7 @@ def logic():
             HUI.update()
         
         if scan_input_data is not None and scan_input_bool is True:
-            scan_input_data_tmp = scan_input_data_tmp.split(',')
+            scan_input_data_tmp = scan_input_data.split(',')
             HUI.show_frame('choice', data=scan_input_data_tmp)
             
             while HUI.tmp is None:
