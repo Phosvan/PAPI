@@ -6,10 +6,10 @@ from ControllerClass import Controller
 def PiFunction():
     PI = PiController()
     while True:
-        PI.scan_input()
-        # if PI.scan_input_bool is True and PI.scan_input_data is None:
-        #     PI.scan_input_data = PI.scan_input()
-        #     PI.scan_input_bool = False
+        
+        if Controller.scan_input_bool is True and PI.scan_input_data is None:
+            PI.scan_input_data = PI.scan_input()
+            PI.scan_input_bool = False
         
         # if PI.listen_bool is True:
         #     PI.listen_data = PI.listen()
