@@ -114,7 +114,7 @@ class HuiController(tk.Tk, Controller):
 
         self.frames = {}
         
-        self.frames['start'] = start(container=self.container, controller=self)
+        self.frames['start'] = start(container=container, controller=self)
     
      def show_frame(self, page_name, data = None):
         '''Show a frame for the given page name'''
