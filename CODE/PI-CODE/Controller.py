@@ -25,7 +25,7 @@ def logic():
 
             if HUI.tmp == True:
                 PI.speak(scan_input_data)
-                PI.listen()
+                print(PI.listen())
                 
                 HUI.tmp = None
                 scan_input_data = None
