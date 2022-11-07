@@ -6,8 +6,8 @@ from ControllerClass import Controller
 def PiFunction():
     PI = PiController()
     while True:
-        
-        if Controller.scan_input_bool is True and PI.scan_input_data is None:
+        print(PI.scan_input_bool)
+        if PI.scan_input_bool is True and PI.scan_input_data is None:
             PI.scan_input_data = PI.scan_input()
             PI.scan_input_bool = False
         
@@ -24,6 +24,7 @@ def PiFunction():
 def HuiFunction():
     HUI = HuiController()
     while True:
+        print(HUI.scan_input_bool)
         if HUI.scan_input_data is None:
             HUI.show_frame('start')
             HUI.scan_input_bool = True
