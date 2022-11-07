@@ -90,6 +90,7 @@ class PiController():
             arduinoReply = self.recvLikeArduino()
             if not (arduinoReply == 'XXX'):
                 return arduinoReply
+            self.HUI.update()
         
 
 class HuiController(tk.Tk):

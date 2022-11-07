@@ -4,30 +4,39 @@ from ControllerClass import PiController
 
 
 def logic():
-    scan_input_bool = True
-    listen_bool = False
-    speak_bool = False
-    listen_data = None
+
     scan_input_data = None
 
     HUI = HuiController()
     PI = PiController(HUI)
 
     while True:
-        if scan_input_data is None and scan_input_bool is True:
+        if scan_input_data is None:
             HUI.show_frame('start')
             scan_input_data = PI.scan_input()
             HUI.update()
         
-        if scan_input_data is not None and scan_input_bool is True:
+        if scan_input_data is not None:
             scan_input_data_tmp = scan_input_data.split(',')
             HUI.show_frame('choice', data=scan_input_data_tmp)
-            
+
             while HUI.tmp is None:
                 HUI.update()
 
             if HUI.tmp == True:
                 PI.speak(scan_input_data)
+                PI.listen()
+                
+                HUI.tmp = None
+                scan_input_data = None
+
+                HUI.update()
+
+
+            if HUI.tmp == False:
+                scan_input_data = None
+                HUI.tmp = None
+
                 HUI.update()
 
 
