@@ -49,12 +49,13 @@ def HuiFunction():
         if scan_input_data is None:
             HUI.show_frame('start')
             scan_input_bool = True
+            print("Here")
             HUI.update()
 
-        if scan_input_data is not None:
-            scan_input_bool = False
-            HUI.show_frame('choice', scan_input_data)
-            HUI.update()
+        # if scan_input_data is not None:
+        #     scan_input_bool = False
+        #     HUI.show_frame('choice', scan_input_data)
+        #     HUI.update()
         
 
 def logic():
