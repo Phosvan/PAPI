@@ -21,7 +21,6 @@ def PiFunction():
 
     PI = PiController()
     while True:
-        print(scan_input_bool)
         if scan_input_bool is True and scan_input_data is None:
             PI.scan_input_data = PI.scan_input()
             PI.scan_input_bool = False
@@ -46,15 +45,14 @@ def HuiFunction():
 
     HUI = HuiController()
     while True:
-        print(scan_input_bool)
-        if HUI.scan_input_data is None:
+        if scan_input_data is None:
             HUI.show_frame('start')
-            HUI.scan_input_bool = True
+            scan_input_bool = True
             HUI.update()
 
-        if HUI.scan_input_data is not None:
-            HUI.scan_input_bool = False
-            HUI.show_frame('choice', HUI.scan_input_data)
+        if scan_input_data is not None:
+            scan_input_bool = False
+            HUI.show_frame('choice', scan_input_data)
             HUI.update()
         
 
