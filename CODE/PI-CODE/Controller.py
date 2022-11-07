@@ -3,7 +3,22 @@ from ControllerClass import HuiController
 from ControllerClass import PiController
 from ControllerClass import Controller
 
+scan_input_bool = False
+listen_bool = False
+speak_bool = False
+    
+scan_input_data = None
+listen_data = None
+
+
 def PiFunction():
+
+    global scan_input_bool
+    global listen_bool
+    global speak_bool
+    global listen_data
+    global scan_input_data
+
     PI = PiController()
     while True:
         print(PI.scan_input_bool)
@@ -22,6 +37,13 @@ def PiFunction():
 
 
 def HuiFunction():
+
+    global scan_input_bool
+    global listen_bool
+    global speak_bool
+    global listen_data
+    global scan_input_data
+
     HUI = HuiController()
     while True:
         print(HUI.scan_input_bool)
