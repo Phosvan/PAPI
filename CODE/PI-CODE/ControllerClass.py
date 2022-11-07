@@ -19,7 +19,7 @@ class PiController():
         self.parse_file()
     
     def parse_file(self):
-        self.setupSerial("9600","/dev/ttyACM0")
+        self.setupSerial("9600","/dev/ttyS0")
         
     def setupSerial(self, baudRate, serialPortName):
         self.serialPort = serial.Serial(port= serialPortName, baudrate = baudRate, timeout=0, rtscts=True)
