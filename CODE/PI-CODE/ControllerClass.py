@@ -68,7 +68,7 @@ class PiController():
         if len(value) == 0:
             return None
 
-        return value[0].data.decode("utf-8") 
+        return value[0].data.decode("utf-8", errors='replace') 
 
     def scan_input(self):
         if self.debug:
