@@ -90,8 +90,8 @@ class PiController(Controller):
             if ret == True:
                 qr_value = self.read_qr(frame)
 
-            if qr_value is None: continue
-            else: return qr_value
+                if qr_value is None: continue
+                else: return qr_value
 
     def speak(self, qr_value):
         self.sendToArduino(qr_value)

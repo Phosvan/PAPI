@@ -97,5 +97,4 @@ class mm(tk.Frame):
     
 if __name__ == "__main__":
     app = HUIApp()
-    while True:
-        app.update()
+    app.mainloop()
