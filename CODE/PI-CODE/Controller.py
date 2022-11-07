@@ -21,6 +21,7 @@ def PiFunction():
 
     PI = PiController()
     while True:
+        print(scan_input_bool)
         if scan_input_bool is True and scan_input_data is None:
             scan_input_data = PI.scan_input()
             scan_input_bool = False
