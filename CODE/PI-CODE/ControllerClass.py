@@ -4,19 +4,6 @@ import cv2 as cv
 import serial
 from pyzbar.pyzbar import decode
 
-# class Controller:
-#     scan_input_bool = False
-#     listen_bool = False
-#     speak_bool = False
-    
-#     scan_input_data = None
-#     listen_data = None
-
-
-#     def __init__(self) -> None:
-#         pass
-
-
 class PiController():
     def __init__(self, Hui):
         self.HUI = Hui
@@ -132,7 +119,7 @@ class HuiController(tk.Tk):
             frame.tkraise()
 
      def create_choice(self, page_name, data):
-        self.frames[page_name] = choice(parent=self.container, controller=self)
+        self.frames[page_name] = choice(parent=self.container, controller=self, data=data)
         self.frames[page_name].grid(row=0, column= 0, sticky= "nsew")
 
      def give_bool(self, val):
@@ -147,12 +134,12 @@ class start(tk.Frame):
         label.pack(side="top", fill= "x", pady=10)    
 
 class choice(tk.Frame):
-     def __init__(self, parent, controller):
+     def __init__(self, parent, controller, data):
         tk.Frame.__init__(self, parent, bg= "#d459de")
         self.controller = controller
-        label1 = tk.Label(self, text= "ID#:", bg= "#d459de", font= ("Calibri",50), height= 1)
+        label1 = tk.Label(self, text= f"{data[2]}", bg= "#d459de", font= ("Calibri",50), height= 1)
         label1.pack(side= "top", fill= "x", pady=5)
-        Label2 = tk.Label(self, text= "Name Variable Here",bg= "#d459de", font= ("Calibri", 50), height= 1)
+        Label2 = tk.Label(self, text= f"{data[1]} {data[0]}",bg= "#d459de", font= ("Calibri", 50), height= 1)
         Label2.pack(side= "top", fill= "x", pady=5)
         button1 = tk.Button(self, text= "Correct Information", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_bool(True))
