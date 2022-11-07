@@ -125,7 +125,7 @@ class HuiController(tk.Tk, Controller):
         self.show_frame("start")
 
     
-     def show_frame(self, page_name, data =None):
+    def show_frame(self, page_name, data =None):
         '''Show a frame for the given page name'''
         frame = self.frames[page_name]
         frame.tkraise()
@@ -196,7 +196,7 @@ class mm(tk.Frame):
      def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, bg= "#d459de")
         self.controller = controller
-        
+
         #label1 = tk.Label
 #      def __init__(self, *args, **kwargs):
 #         tk.Tk.__init__(self, *args, **kwargs)
