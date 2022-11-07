@@ -33,12 +33,12 @@ def HuiFunction():
         if HUI.scan_input_data is None:
             HUI.show_frame('start')
             HUI.scan_input_bool = True
-            HUI.update()
+            HUI.update_idletasks()
 
         if HUI.scan_input_data is not None:
             HUI.scan_input_bool = False
             HUI.show_frame('choice', HUI.scan_input_data)
-            HUI.update()
+            HUI.update_idletasks()
         
 
 def logic():
