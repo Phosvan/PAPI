@@ -21,7 +21,7 @@ def PiFunction():
 
     PI = PiController()
     while True:
-        print(PI.scan_input_bool)
+        print(scan_input_bool)
         if scan_input_bool is True and scan_input_data is None:
             PI.scan_input_data = PI.scan_input()
             PI.scan_input_bool = False
@@ -46,7 +46,7 @@ def HuiFunction():
 
     HUI = HuiController()
     while True:
-        print(HUI.scan_input_bool)
+        print(scan_input_bool)
         if HUI.scan_input_data is None:
             HUI.show_frame('start')
             HUI.scan_input_bool = True
