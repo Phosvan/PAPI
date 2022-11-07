@@ -3,12 +3,6 @@ from ControllerClass import HuiController
 from ControllerClass import PiController
 from ControllerClass import Controller
 
-class Controller:
-    scan_input_bool = False
-    def __init__(self) -> None:
-        pass
-
-
 def PiFunction():
     PI = PiController()
     while True:
@@ -24,7 +18,6 @@ def PiFunction():
             PI.speak(PI.scan_input_data)
             if PI.listen() == "done":
                 PI.scan_input_data = None
-
 
 
 def HuiFunction():
