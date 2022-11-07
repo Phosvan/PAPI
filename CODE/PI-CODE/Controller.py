@@ -22,7 +22,7 @@ def PiFunction():
     PI = PiController()
     while True:
         print(PI.scan_input_bool)
-        if PI.scan_input_bool is True and PI.scan_input_data is None:
+        if scan_input_bool is True and scan_input_data is None:
             PI.scan_input_data = PI.scan_input()
             PI.scan_input_bool = False
         
