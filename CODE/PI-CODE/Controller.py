@@ -11,7 +11,6 @@ class Controller:
 
 def PiFunction():
     PI = PiController()
-    PiController.setupSerial()
     while True:
         if PI.scan_input_bool is True and PI.scan_input_data is None:
             PI.scan_input_data = PiController.scan_input()
