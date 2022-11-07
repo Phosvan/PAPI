@@ -19,6 +19,7 @@ def logic():
             if scan_input_data is None:
                 HUI.show_frame('start')
                 scan_input_data = PI.scan_input()
+                print(scan_input_data)
                 HUI.update()
             
             if scan_input_data is not None:
