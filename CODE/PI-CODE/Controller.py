@@ -87,9 +87,7 @@ def logic():
                 HUI.update()
 
             if HUI.tmp == True:
-                
-
-
+                print("Test")
 
 
 if __name__ == '__main__':
