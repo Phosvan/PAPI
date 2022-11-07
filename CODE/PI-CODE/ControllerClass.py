@@ -117,7 +117,7 @@ class HuiController(tk.Tk):
         self.container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        self.frames['start'] = start(parent=self.container, container=self)
+        self.frames['start'] = start(parent=self.container, controller=self)
         self.frames['start'].grid(row=0, column= 0, sticky= "nsew")
     
      def show_frame(self, page_name, data = None):
