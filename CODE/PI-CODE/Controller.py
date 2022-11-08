@@ -39,8 +39,8 @@ def logic():
                 print(scan_input_data)
                 PI.speak(scan_input_data)
                 print(4.5)
-                print(PI.listen())
-                print(4.6)
+                while PI.listen() != "done":
+                    HUI.update()
                 
                 HUI.tmp = None
                 scan_input_data = None
