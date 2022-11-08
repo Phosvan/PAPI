@@ -21,7 +21,7 @@ def logic():
             scan_input_data = PI.scan_input()
             HUI.update()
         
-        else if scan_input_data == "Manual":
+        elif scan_input_data == "Manual":
             
             HUI.show_page('manual')
             while HUI.mm_send_bool is None:
@@ -48,7 +48,7 @@ def logic():
                 HUI.mm_send_bool = None
                 HUI.update()
 
-        else if scan_input_data is not None:
+        elif scan_input_data is not None:
             scan_input_data_tmp = scan_input_data.split(',')
             HUI.show_frame('choice', data=scan_input_data_tmp)
 
