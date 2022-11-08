@@ -154,7 +154,7 @@ class Options():
     ]
     
     def __init__(self, parent):
-        userSelect = StringVar()
+        userSelect = tk.StringVar()
         userSelect.set(options[0])
         drop_menu = OptionsMenu(parent, userSelect, *options)
         drop_menu.grid(row=1,column=10,columnspan=1)
