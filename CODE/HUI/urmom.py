@@ -211,7 +211,7 @@ class choice(tk.Frame):
             greenLabel = Label(self, text = "Proceeding to Fill...")
             greenLabel.grid(row=4, column=1)
 
-        greenButton = Button(self, text = "YES", command=greenButton, fg  ='#3EF928')
+        greenButton = Button(self, text = "YES", command=greenButton, font = ('Oswald', 20) , fg  ='#FEC923')
         controller.attributes('-fullscreen', True)
         greenButton.grid(row=3, column=3)
 
@@ -221,7 +221,7 @@ class choice(tk.Frame):
             redLabel = Label(self, text = "Order Cancelled" )
             redLabel.grid(row=4, column=1)
 
-        redButton = Button(self, text= "NO", command=redButton, fg ='#F92828')
+        redButton = Button(self, text = "NO", command=redButton, font = ('Oswald', 20), fg ='#592A8A')
         redButton.grid(row=3, column=2)
 
         # label1 = tk.Label(self, text= f"{data[2]}", bg= "#d459de", font= ("Calibri",50), height= 1)
