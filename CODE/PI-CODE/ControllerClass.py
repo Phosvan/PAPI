@@ -141,16 +141,16 @@ class HuiController(tk.Tk):
         
 class Options():
     options=[
-    'hopone'.
-    'hoptwo'.
-    'hopthree'.
-    'hopfour'.
-    'hopfive'.
-    'hopsix'.
-    'hopseven'.
-    'hopeight'.
-    'hopnine'.
-    'hopten'.
+    'hopone',
+    'hoptwo',
+    'hopthree',
+    'hopfour',
+    'hopfive',
+    'hopsix',
+    'hopseven',
+    'hopeight',
+    'hopnine',
+    'hopten',
     ]
     
     def __init__(self, parent):
