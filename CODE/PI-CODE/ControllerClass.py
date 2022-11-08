@@ -173,10 +173,10 @@ class manual(tk.Frame):
 
         button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_send_bool(True))
-        button1.grid(row=1,column=10,columnspan=1)
+        button1.grid(row=0, column= 0, sticky= "nsew")
         button2 = tk.Button(self, text= "Cancel", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_send_bool(False))
-        button2.grid(row=1,column=10,columnspan=1)
+        button2.grid(row=0, column= 0, sticky= "nsew")
 
 class start(tk.Frame):
     def __init__(self, parent, controller):
