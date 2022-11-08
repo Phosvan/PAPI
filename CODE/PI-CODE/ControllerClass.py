@@ -157,9 +157,9 @@ class Options():
         userSelect = tk.StringVar()
         userSelect.set(Options.options[0])
         drop_menu = tk.OptionMenu(parent, userSelect, Options.options)
-        drop_menu.grid(row=1,column=10,columnspan=1)
+        drop_menu.pack(side= "bottom", fill= "x", pady=5)
         amount = tk.Spinbox(parent, from_=0, to=30)
-        amount.grid(row=1,column=10,columnspan=1)
+        amount.pack(side= "bottom", fill= "x", pady=5)
 
 
 class manual(tk.Frame):
@@ -173,10 +173,10 @@ class manual(tk.Frame):
 
         button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_send_bool(True))
-        button1.grid(row=0, column= 0, sticky= "nsew")
+        button1.pack(side= "bottom", fill= "x", pady=5)
         button2 = tk.Button(self, text= "Cancel", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_send_bool(False))
-        button2.grid(row=0, column= 0, sticky= "nsew")
+        button2.pack(side= "bottom", fill= "x", pady=5)
 
 class start(tk.Frame):
     def __init__(self, parent, controller):
