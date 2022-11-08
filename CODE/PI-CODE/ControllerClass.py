@@ -113,8 +113,7 @@ class HuiController(tk.Tk):
 
         if page_name == 'choice':
             self.create_choice(page_name, data)
-            frame = self.frames[page_name]
-            frame.tkraise()
+            self.frames[page_name].tkraise()
         else:
             frame = self.frames[page_name]
             frame.tkraise()
