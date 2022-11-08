@@ -75,6 +75,9 @@ class PiController():
             print("Camera On")
         while True:
             self.HUI.update()
+            if (self.HUI.mm_bool){
+                return "Manual"
+            }
             ret, frame = self.vid.read()
             if ret == True:
                 qr_value = self.read_qr(frame)
@@ -90,14 +93,16 @@ class PiController():
             arduinoReply = self.recvLikeArduino()
             if not (arduinoReply == 'XXX'):
                 return arduinoReply
-            self.HUI.update()
-        
+            self.HUI.update()     
+
 
 class HuiController(tk.Tk):
      def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         
         self.tmp = None
+        self.mm_bool = None
+        self.mm_send_bool = None
 
         self.container = tk.Frame(self)
         self.container.pack(side="top", fill="both", expand=True)
@@ -107,6 +112,8 @@ class HuiController(tk.Tk):
         self.frames = {}
         self.frames['start'] = start(parent=self.container, controller=self)
         self.frames['start'].grid(row=0, column= 0, sticky= "nsew")
+        self.frames['manual'] = manual(parent=self.container, controller=self)
+        self.frames['manual'].grid(row=0,column=0,sticky="nsew")
     
      def show_frame(self, page_name, data = None):
         '''Show a frame for the given page name'''
@@ -124,7 +131,51 @@ class HuiController(tk.Tk):
 
      def give_bool(self, val):
         self.tmp = val
+    
+     def give_mm_bool(self, val):
+        self.mm_bool = val
+
+     def give_mm_send_bool(self, val):
+        self.mm_send_bool = val
+    
         
+class Options():
+    options=[
+    'hopone'.
+    'hoptwo'.
+    'hopthree'.
+    'hopfour'.
+    'hopfive'.
+    'hopsix'.
+    'hopseven'.
+    'hopeight'.
+    'hopnine'.
+    'hopten'.
+    ]
+    
+    def __init__(self, parent):
+        userSelect = StringVar()
+        userSelect.set(options[0])
+        drop_menu = OptionsMenu(parent, userSelect, *options)
+        drop_menu.grid(row=1,column=10,columnspan=1)
+        amount = Spinbox(parent, from_=0, to=30)
+        amount.grid(row=1,column=10,columnspan=1)
+
+
+class manual(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init(self, parent)
+        self.controller = controller
+
+        entrys = []
+        for i in range(10):
+            entrys.append(Options(self))
+
+        button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 20), fg= "green",
+        command= lambda: controller.give_mm_send_bool(True))
+        button2 = tk.Button(self, text= "Cancel", font= ("Copper Black", 20), fg= "green",
+        command= lambda: controller.give_mm_send_bool(False))
+
 class start(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent, bg= "#d459de")
@@ -132,6 +183,8 @@ class start(tk.Frame):
         label = tk.Label (self, text= "Welcome to PAPI, Please Scan QR", width= 20, height= 5, font= ("Comic Sans Ms",50), bg= "#d459de")    
         controller.attributes('-fullscreen', True)
         label.pack(side="top", fill= "x", pady=10)    
+        button1 = tk.Button(self, text= "Manual Mode", font= ("Copper Black", 20), fg= "green",
+        command= lambda: controller.give_mm_bool(True))
 
 class choice(tk.Frame):
      def __init__(self, parent, controller, data):

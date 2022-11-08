@@ -17,28 +17,46 @@ def logic():
         #         PI.speak(PI.scan_input())
         # else:
         if scan_input_data is None:
-            print(1)
-            print(scan_input_data)
             HUI.show_frame('start')
             scan_input_data = PI.scan_input()
             HUI.update()
         
-        if scan_input_data is not None:
-            print(2)
-            print(scan_input_data)
+        else if scan_input_data == "Manual":
+            
+            HUI.show_page('manual')
+            while HUI.mm_send_bool is None:
+                HUI.update()
+
+            if HUI.mm_send_bool:
+                simulated_data = ['simulated']
+                for option_object in HUI.frames['manual'].entrys:
+                    simulated_data.append(option_object.drop_menu.get())
+                    simulated_data.append(option_object.amount.get())
+                    HUI.update()
+
+                simulated_data = ','.join(simulated_data)
+                PI.speak(simulated_data)
+                    while PI.listen() != "done":
+                        HUI.update()
+                    HUI.mm_bool = None
+                    HUI.mm_send_bool = None
+                    scan_input_data = None
+            
+            else:
+                scan_input_data = None
+                HUI.mm_bool = None
+                HUI.mm_send_bool = None
+                HUI.update()
+
+        else if scan_input_data is not None:
             scan_input_data_tmp = scan_input_data.split(',')
             HUI.show_frame('choice', data=scan_input_data_tmp)
 
             while HUI.tmp is None:
-                print(3)
-                print(scan_input_data)
                 HUI.update()
 
             if HUI.tmp == True:
-                print(4)
-                print(scan_input_data)
                 PI.speak(scan_input_data)
-                print(4.5)
                 while PI.listen() != "done":
                     HUI.update()
                 
@@ -48,8 +66,7 @@ def logic():
                 HUI.update()
 
 
-            if HUI.tmp == False:
-                print(5)
+            else:
                 scan_input_data = None
                 HUI.tmp = None
 
