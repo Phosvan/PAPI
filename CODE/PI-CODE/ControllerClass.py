@@ -156,7 +156,7 @@ class Options():
     def __init__(self, parent):
         userSelect = tk.StringVar()
         userSelect.set(Options.options[0])
-        drop_menu = tk.OptionMenu(parent, userSelect, Options.options)
+        drop_menu = tk.OptionMenu(parent, userSelect, *Options.options)
         drop_menu.pack(side= "bottom", fill= "x", pady=5)
         amount = tk.Spinbox(parent, from_=0, to=30)
         amount.pack(side= "bottom", fill= "x", pady=5)
