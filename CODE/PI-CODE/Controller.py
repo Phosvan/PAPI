@@ -23,7 +23,7 @@ def logic():
         
         elif scan_input_data == "Manual":
             
-            HUI.show_page('manual')
+            HUI.show_frame('manual')
             while HUI.mm_send_bool is None:
                 HUI.update()
 
