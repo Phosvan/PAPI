@@ -67,13 +67,28 @@ class Hopper{
     }
     
     drop_pills(int amount){
+      int internal_count = 0;
+      bool reverse_direction = false;
       bool count = true;
       while (amount > 0){
         if (this->ir.c > ir_drop){
           count = true;
         }
 
-        this->srvo.writeMicroseconds(turnSpeed);
+        if (internal_count % 1000 > 500){
+          reverse_direction = true;
+        }
+
+        else{
+          reverse_direction = false;
+        }
+
+        if (reverse_direction){
+          this->srvo.writeMicroseconds(turnSpeed+400);
+        }
+        else{
+          this->srvo.writeMicroseconds(turnSpeed);
+        }
         digitalWrite(ir_digital,HIGH);    // Turning ON LED
         delayMicroseconds(500);  //wait
         this->ir.calc_a();        //take reading from photodiode(pin A3) :noise+signal
@@ -86,8 +101,12 @@ class Hopper{
 
         if (this->ir.c < ir_drop && count == true){
           count = false;
+          internal_count == 0;
           amount--;        
         }
+        
+        internal_count++;
+
       }
       this->srvo.writeMicroseconds(turnStop);
     }
@@ -151,7 +170,7 @@ void loop() {
   if (debug){
     replyToPython();
   }
-  // done();
+  done();
 }
 
 //===============
@@ -271,13 +290,14 @@ void dispense_pills(){
         ptr+=2;       
       }
     }
+    pills_dispensed = true;
   }
 }
 
 //===============
 
 void replyToPython() {
-    if (serialReceived == true) {
+    if (serialReceived == true && serialParsed == true) {
         Serial.print('<');
         Serial.println(serialRXArray);    
         for (int i=0; i < parsed_size; i++){
@@ -288,7 +308,7 @@ void replyToPython() {
 }
 
 void done(){
-  if (serialReceived == true){
+  if (pills_dispensed == true){
     Serial.print("<done>");
     serialEchoFlag = false; //Set this flag to echo data back to Serial Host. True negatively impacts runtime!!
     serialReceived = false; //Do not adjust, flag used in processing logic

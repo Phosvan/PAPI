@@ -17,19 +17,22 @@ def logic():
         #         PI.speak(PI.scan_input())
         # else:
         if scan_input_data is None:
+            print(1)
             HUI.show_frame('start')
             scan_input_data = PI.scan_input()
-            # print(scan_input_data)
             HUI.update()
         
         if scan_input_data is not None:
+            print(2)
             scan_input_data_tmp = scan_input_data.split(',')
             HUI.show_frame('choice', data=scan_input_data_tmp)
 
             while HUI.tmp is None:
+                print(3)
                 HUI.update()
 
             if HUI.tmp == True:
+                print(4)
                 PI.speak(scan_input_data)
                 print(PI.listen())
                 
@@ -40,6 +43,7 @@ def logic():
 
 
             if HUI.tmp == False:
+                print(5)
                 scan_input_data = None
                 HUI.tmp = None
 
