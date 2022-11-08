@@ -36,8 +36,8 @@ def logic():
 
                 simulated_data = ','.join(simulated_data)
                 PI.speak(simulated_data)
-                    while PI.listen() != "done":
-                        HUI.update()
+                while PI.listen() != "done":
+                    HUI.update()
                     HUI.mm_bool = None
                     HUI.mm_send_bool = None
                     scan_input_data = None
