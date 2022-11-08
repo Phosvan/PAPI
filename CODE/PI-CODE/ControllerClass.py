@@ -187,6 +187,7 @@ class start(tk.Frame):
         label.pack(side="top", fill= "x", pady=10)    
         button1 = tk.Button(self, text= "Manual Mode", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_bool(True))
+        button1.pack(side= "bottom", fill= "x", pady=5)
 
 class choice(tk.Frame):
      def __init__(self, parent, controller, data):
