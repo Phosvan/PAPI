@@ -163,7 +163,7 @@ class Options():
 
 
 class manual(tk.Frame):
-    def __init__(self, parent.parent, controller):
+    def __init__(self, parent, controller):
         tk.Frame.__init(self, parent, bg= "#d459de")
         self.controller = controller
 
