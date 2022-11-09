@@ -16,11 +16,6 @@ str4="https://raw.githubusercontent.com/Phosvan/PAPI/main/CODE/PI-CODE/Controlle
 SERVICE="python3"
 
 
-
-wget -q $str1
-wget -q $str2
-wget -q $str3
-
 curl --silent $str1 | md5sum > "$str11.md5new"
 curl --silent $str2 | md5sum > "$str22.md5new"
 curl --silent $str3 | md5sum > "$str33.md5new"
@@ -37,6 +32,8 @@ if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str11"
     sudo rm -r Controller.py
     wget -q $str1
+    rm "$str33.md5new"
+	rm "$str33.md5"
     sudo pkill -9 -f $str11
     sudo python3 /home/pi/Documents/Controller.py
 else
@@ -50,6 +47,8 @@ if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str22"
     sudo rm -r ControllerClass.py
     wget -q $str2
+    rm "$str33.md5new"
+	rm "$str33.md5"
 else
 printf "up to date "
 rm "$str22.md5new"
@@ -62,6 +61,8 @@ if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     sudo rm -r $str33
     wget -q $str3
     chmod +x $str33
+	rm "$str33.md5new"
+	rm "$str33.md5"
 else
 printf "up to date "
 rm "$str33.md5new"
@@ -73,7 +74,7 @@ fi
 
 #else
 
-fi
+#fi
 
 
 
