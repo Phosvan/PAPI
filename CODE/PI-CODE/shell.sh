@@ -15,6 +15,10 @@ str4="https://raw.githubusercontent.com/Phosvan/PAPI/main/CODE/PI-CODE/Controlle
 
 SERVICE="python3"
 
+wget -q $str1
+wget -q $str2
+wget -q $str3
+
 
 curl --silent $str1 | md5sum > "$str11.md5new"
 curl --silent $str2 | md5sum > "$str22.md5new"
