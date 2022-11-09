@@ -32,14 +32,17 @@ if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str11"
     sudo rm -r Controller.py
     wget -q $str1
-    rm "$str33.md5new"
-	rm "$str33.md5"
+
+    rm -r "$str33.md5new"
+	rm -r "$str33.md5"
+
     sudo pkill -9 -f $str11
     sudo python3 /home/pi/Documents/Controller.py
+
 else
 printf "up to date "
-rm "$str11.md5new"
-rm "$str11.md5"
+rm -r "$str11.md5new"
+rm -r "$str11.md5"
 fi
 
 
@@ -51,8 +54,8 @@ if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
 	rm "$str33.md5"
 else
 printf "up to date "
-rm "$str22.md5new"
-rm "$str22.md5"
+rm -r "$str22.md5new"
+rm -r "$str22.md5"
 fi
 
 if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
@@ -61,12 +64,12 @@ if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     sudo rm -r $str33
     wget -q $str3
     chmod +x $str33
-	rm "$str33.md5new"
-	rm "$str33.md5"
+	rm -r "$str33.md5new"
+	rm -r "$str33.md5"
 else
 printf "up to date "
-rm "$str33.md5new"
-rm "$str33.md5"
+rm -r "$str33.md5new"
+rm -r "$str33.md5"
 fi
 
 #elif pgrep -x "$SERVICE" >/dev/null
