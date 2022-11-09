@@ -159,7 +159,7 @@ class Options():
         drop_menu = tk.OptionMenu(parent, userSelect, *Options.options)
         drop_menu.pack(side= "bottom", pady=5)
         amount = tk.Spinbox(parent, from_=0, to=30)
-        amount.grid(row=1, column=1, side= "bottom", pady=5)
+        amount.grid(row=1, column=1, pady=5)
 
 
 class manual(tk.Frame):
