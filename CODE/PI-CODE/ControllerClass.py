@@ -99,7 +99,6 @@ class PiController():
 class HuiController(tk.Tk):
      def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        self.geometry("500x500")
         self.tmp = None
         self.mm_bool = None
         self.mm_send_bool = None
