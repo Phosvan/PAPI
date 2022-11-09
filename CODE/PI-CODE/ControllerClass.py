@@ -204,9 +204,9 @@ class choice(tk.Frame):
         button2 = tk.Button(self, text= "Incorrect Information", font= ("Copper Black", 20), fg= "red",
         command= lambda: controller.give_bool(False))
         button2.pack(side= "bottom", fill= "x", pady=5)
-        # button3 = tk.Button(self, text= "Manual Entry Mode", font=("lato",20),
-        # command= lambda: controller.show_frame("mm"))
-        # button3.pack(side= "bottom", fill= "x", pady=5)
+        button3 = tk.Button(self, text= "Manual Entry Mode", font=("lato",20),
+        command= lambda: controller.show_frame("mm"))
+        button3.pack(side= "bottom", fill= "x", pady=5)
 
 
 class yes(tk.Tk):
