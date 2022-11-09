@@ -22,6 +22,8 @@ curl --silent $str4 | md5sum > "$str44.md5"
 #curl --silent $str5 | md5sum > "$str1.md5"
 
 curl --silent $str1 | md5sum > "$str11.md5new"
+
+
 if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str11"
     sudo rm -r Controller.py
@@ -30,6 +32,7 @@ if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     sudo python3 /home/pi/Documents/Controller.py
 fi
 rm "$str11.md5new"
+rm "$str11.md5"
 
 curl --silent $str2 | md5sum > "$str22.md5new"
 if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
@@ -38,7 +41,7 @@ if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
     wget $str2
 fi
 rm "$str22.md5new"
-
+rm "$str22.md5"
 
 curl --silent $str3 | md5sum > "$str33.md5new"
 if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
@@ -48,7 +51,7 @@ if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     chmod +x $str33
 fi
 rm "$str33.md5new"
-
+rm "$str33.md5"
 
 if pgrep -x "$SERVICE" >/dev/null
 then
