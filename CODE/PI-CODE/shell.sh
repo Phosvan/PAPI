@@ -37,37 +37,42 @@ if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str11"
     sudo rm -r Controller.py
     wget -q $str1
-    sudo pkill -f $str11
+    sudo pkill -9 -f $str11
     sudo python3 /home/pi/Documents/Controller.py
-fi
+else
 printf "up to date "
 rm "$str11.md5new"
 rm "$str11.md5"
+fi 
+
 
 if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str22"
     sudo rm -r ControllerClass.py
     wget -q $str2
-fi
+else
 printf "up to date "
 rm "$str22.md5new"
 rm "$str22.md5"
+fi
+
 
 if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str33"
     sudo rm -r $str33
     wget -q $str3
     chmod +x $str33
-fi
+else
 printf "up to date "
 rm "$str33.md5new"
 rm "$str33.md5"
+fi
+
 
 if pgrep -x "$SERVICE" >/dev/null
 then
-    echo "$SERVICE is curretly running"
+
 else
-    echo "$SERVICE is not currently running, starting "
 
 fi
 
