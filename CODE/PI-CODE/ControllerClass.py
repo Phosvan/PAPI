@@ -3,7 +3,7 @@ from tkinter import font as tkfont
 import cv2 as cv
 import serial
 from pyzbar.pyzbar import decode
-
+export DISPLAY=:0.0
 class PiController():
     def __init__(self, Hui):
         self.HUI = Hui

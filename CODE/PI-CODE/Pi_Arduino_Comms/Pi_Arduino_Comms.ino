@@ -138,7 +138,8 @@ Hopper hoppers[10] = {
 };
 
 // Yellow step, Green direct
-Stepper step = Stepper(100, 3, 22);
+Stepper hopper_stepper = Stepper(100, 14, 2);
+Stepper wrap_stepper = Stepper(100, 15, 13);
 
 char serialRXArray[charSize] = { 0 }; //Initialize a char array of size charSize
 char parsedRXArray[12][64] = { 0 };
@@ -157,11 +158,14 @@ char manual_hash[] = "simulated";
 bool calibrate = false;
 
 bool debug = false; // Prints shit to the pi for viewing
+bool check;
 //===============
 
 void setup() {
   pinMode(16, OUTPUT);
-  step.setSpeed(1000);
+  hopper_stepper.setSpeed(1000);
+  wrap_stepper.setSpeed(1000);
+
 
   Serial.begin(9600);
   Serial.println("<Arduino is ready>");
@@ -210,63 +214,50 @@ void setup() {
   hoppers[7].set_qr(skittleone_str);
   hoppers[8].set_qr(tiktak_str);
   hoppers[9].set_qr(tiktakone_str);
+
+  check = true;
 }
 
 //===============
 
 void loop() {
   
-  // if (calibrate){
-  //   calibration();
-  // }
-  // else{
-  //   Serial.print("<run>");
+  // if (check){
+  //   stepper_logic();
+  //   check=false;
   // }
 
-  serialRead();
-  serialParse();
-  hash_hoppers();
-  dispense_pills();
+  hopper_stepper.step(0);
+  wrap_stepper.step(0);
 
-  if (debug){
-    replyToPython();
-  }
-  done();
+
+
+//   serialRead();
+//   serialParse();
+//   hash_hoppers();
+//   dispense_pills();
+
+//   if (debug){
+//     replyToPython();
+//   }
+//   group_pills();
+//   wrap_pills();  
+//   done();
 }
+
+//===============
+
+
 
 //===============
 
 void calibration(){
   int count = 0;
-  char confirmed[] = "confirmed";
-  Serial.print("<calibrate>");
-  
-  while (true){
-    serialRead();
-    if (Hopper::string_hash(serialRXArray) == Hopper::string_hash(confirmed)){
-      break;
-    }
-    serialReceived = false;
-  }
-  Serial.print("continue");
-  while (calibrate) {
-    step.step(1500);
+}
 
-    serialRead();
-    if (serialReceived){
-      hoppers[count].set_qr(serialRXArray);
-      serialReceived = false;
-      Serial.print("continue");      
-      count++;
-    }
-
-    if (count == 1){
-      step.step(0);
-      calibrate = false;
-      serialReceived = false;
-      break;
-    }
-  }
+void stepper_logic() {
+  hopper_stepper.step(100);
+  wrap_stepper.step(100);
 }
 
 //===============
