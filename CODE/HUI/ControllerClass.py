@@ -157,9 +157,9 @@ class Options():
         userSelect = tk.StringVar()
         userSelect.set(Options.options[0])
         drop_menu = tk.OptionMenu(parent, userSelect, *Options.options)
-        drop_menu.pack(ipadx=150,ipady=10, anchor=tk.NW)
+        drop_menu.pack(ipadx=10,ipady=5, anchor=tk.NW)
         amount = tk.Spinbox(parent, from_=0, to=30, font=(30))
-        amount.pack(ipadx=10,ipady=10, anchor=tk.NE)
+        amount.pack(ipadx=5,ipady=5, anchor=tk.NE)
 
 
 class manual(tk.Frame):
