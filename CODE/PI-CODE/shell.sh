@@ -13,6 +13,8 @@ str33="shell.sh"
 str4="https://raw.githubusercontent.com/Phosvan/PAPI/main/CODE/PI-CODE/Controller*"
 
 
+SERVICE = python3
+
 curl --silent $str1 | md5sum > "$str11.md5"
 curl --silent $str2 | md5sum > "$str22.md5"
 curl --silent $str3 | md5sum > "$str33.md5"
@@ -46,3 +48,19 @@ if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     chmod +x $str33
 fi
 rm "$str33.md5new"
+
+
+if pgrep -x "$SERVICE" >/dev/null
+then
+    echo "$SERVICE is running"
+else
+    echo "$SERVICE stopped"
+
+fi
+
+
+
+
+
+
+
