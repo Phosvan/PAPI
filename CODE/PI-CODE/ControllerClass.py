@@ -105,14 +105,14 @@ class HuiController(tk.Tk):
 
         self.container = tk.Frame(self)
         self.container.grid(row=1, column=1)
-        self.container.grid_rowconfigure(0, weight=1)
-        self.container.grid_columnconfigure(0, weight=1)
+        #self.container.grid_rowconfigure(0, weight=1)
+        #self.container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
         self.frames['start'] = start(parent=self.container, controller=self)
-        self.frames['start'].grid(row=0, column= 0, sticky= "nsew")
+        self.frames['start'].grid(row=0, column= 0)#sticky="nsew"
         self.frames['manual'] = manual(parent=self.container, controller=self)
-        self.frames['manual'].grid(row=0,column=0,sticky="nsew")
+        self.frames['manual'].grid(row=0,column=0)#sticky="nsew"
     
      def show_frame(self, page_name, data = None):
         '''Show a frame for the given page name'''
@@ -126,7 +126,7 @@ class HuiController(tk.Tk):
 
      def create_choice(self, page_name, data):
         self.frames[page_name] = choice(parent=self.container, controller=self, data=data)
-        self.frames[page_name].grid(row=0, column= 0, sticky= "nsew")
+        self.frames[page_name].grid(row=0, column= 0) #sticky= "nsew"
 
      def give_bool(self, val):
         self.tmp = val
@@ -156,9 +156,9 @@ class Options():
         userSelect = tk.StringVar()
         userSelect.set(Options.options[0])
         drop_menu = tk.OptionMenu(parent, userSelect, *Options.options)
-        drop_menu.grid(row=5, columnspan=4, pady=5)
+        drop_menu.grid(row=5, columnspan=4)
         amount = tk.Spinbox(parent, from_=0, to=30)
-        amount.grid(row=1, column=1, pady=5)
+        amount.grid(row=1, column=1)
 
 
 class manual(tk.Frame):
@@ -172,10 +172,10 @@ class manual(tk.Frame):
 
         button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_send_bool(True))
-        button1.grid(row=4, columnspan = 4, pady=5) #side= "right", fill= "x",
+        button1.grid(row=4, columnspan = 4) #side= "right", fill= "x",
         button2 = tk.Button(self, text= "Cancel", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_send_bool(False))
-        button2.grid(row=5, columnspan = 4, pady=5) #side= "right", fill= "x",
+        button2.grid(row=5, columnspan = 4) #side= "right", fill= "x",
 
 class start(tk.Frame):
     def __init__(self, parent, controller):
@@ -183,28 +183,28 @@ class start(tk.Frame):
         self.controller = controller
         label = tk.Label (self, text= "Welcome to PAPI, Please Scan QR", width= 20, height= 5, font= ("Comic Sans Ms",50), bg= "#d459de")    
         controller.attributes('-fullscreen', True)
-        label.grid(row=2, column=2, pady=10)    
+        label.grid(row=2, column=2)    
         button1 = tk.Button(self, text= "Manual Mode", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_bool(True))
-        button1.grid(row=5, columnspan=4, pady=5)
+        button1.grid(row=5, columnspan=4)
 
 class choice(tk.Frame):
      def __init__(self, parent, controller, data):
         tk.Frame.__init__(self, parent, bg= "#d459de")
         self.controller = controller
         label1 = tk.Label(self, text= f"{data[2]}", bg= "#d459de", font= ("Calibri",50), height= 1)
-        label1.grid(row=1, column=1, columnspan=4, pady=5)
+        label1.grid(row=1, column=1, columnspan=4)
         Label2 = tk.Label(self, text= f"{data[1]} {data[0]}",bg= "#d459de", font= ("Calibri", 50), height= 1)
-        Label2.grid(row=2, column=1, columnspan=4, pady=5)
+        Label2.grid(row=2, column=1, columnspan=4)
         button1 = tk.Button(self, text= "Correct Information", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_bool(True))
-        button1.grid(row=4, column=3, columnspan=4, pady=5)
+        button1.grid(row=4, column=3, columnspan=4)
         button2 = tk.Button(self, text= "Incorrect Information", font= ("Copper Black", 20), fg= "red",
         command= lambda: controller.give_bool(False))
-        button2.grid(row=5, column=3, columnspan=4, pady=5)
+        button2.grid(row=5, column=3, columnspan=4)
         button3 = tk.Button(self, text= "Manual Entry Mode", font=("lato",20),
         command= lambda: controller.show_frame("mm"))
-        button3.grid(row=6, pady=5)
+        button3.grid(row=6)
 
 
 class yes(tk.Tk):
