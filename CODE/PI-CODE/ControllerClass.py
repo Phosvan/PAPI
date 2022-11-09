@@ -158,7 +158,7 @@ class Options():
         userSelect = tk.StringVar()
         userSelect.set(Options.options[0])
         drop_menu = tk.OptionMenu(parent, userSelect, *Options.options)
-        drop_menu.pack(ipadx=150,ipady=10, anchor=tk.NW)
+        drop_menu.pack(ipadx=50,ipady=5, anchor=tk.NW)
         amount = tk.Spinbox(parent, from_=0, to=30, font=(30))
         amount.pack(ipadx=10,ipady=10, anchor=tk.NE)
 
@@ -186,7 +186,7 @@ class start(tk.Frame):
         label = tk.Label (self, text= "Welcome to PAPI, Please Scan QR", width= 20, height= 5, font= ("Comic Sans Ms",50), bg= "#d459de")    
         controller.attributes('-fullscreen', True)
         label.pack(side="top", fill= "x", pady=10)    
-        button1 = tk.Button(self, text= "Manual Mode", font= ("Copper Black", 20), fg= "green",
+        button1 = tk.Button(self, text= "Manual Mode", font= ("Copper Black", 20), fg= "green"
         command= lambda: controller.give_mm_bool(True))
         button1.pack(side= "bottom", fill= "x", pady=5)
 
