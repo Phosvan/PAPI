@@ -31,8 +31,9 @@ if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     sudo pkill -f $str11
     sudo python3 /home/pi/Documents/Controller.py
 fi
-rm "$str11.md5new"
-rm "$str11.md5"
+printf "up to date "
+#rm "$str11.md5new"
+#rm "$str11.md5"
 
 curl --silent $str2 | md5sum > "$str22.md5new"
 if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
@@ -40,6 +41,7 @@ if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
     sudo rm -r ControllerClass.py
     wget $str2
 fi
+printf "up to date "
 rm "$str22.md5new"
 rm "$str22.md5"
 
@@ -50,14 +52,15 @@ if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     wget $str3
     chmod +x $str33
 fi
+printf "up to date "
 rm "$str33.md5new"
 rm "$str33.md5"
 
 if pgrep -x "$SERVICE" >/dev/null
 then
-    echo "$SERVICE is running"
+    echo "$SERVICE is curretly running"
 else
-    echo "$SERVICE stopped"
+    echo "$SERVICE is not currently running, starting "
 
 fi
 
