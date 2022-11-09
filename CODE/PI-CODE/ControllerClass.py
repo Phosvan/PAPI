@@ -105,14 +105,14 @@ class HuiController(tk.Tk):
 
         self.container = tk.Frame(self)
         self.container.grid(row=1, column=1)
-        self.container.grid_rowconfigure(0, weight=1)
-        self.container.grid_columnconfigure(0, weight=1)
+        #self.container.grid_rowconfigure(0, weight=1)
+        #self.container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
         self.frames['start'] = start(parent=self.container, controller=self)
-        self.frames['start'].grid(row=0, column= 0, sticky= "nsew")
+        self.frames['start'].grid(row=0, column= 0)#sticky="nsew"
         self.frames['manual'] = manual(parent=self.container, controller=self)
-        self.frames['manual'].grid(row=0,column=0,sticky="nsew")
+        self.frames['manual'].grid(row=0,column=0)#sticky="nsew"
     
      def show_frame(self, page_name, data = None):
         '''Show a frame for the given page name'''
@@ -126,7 +126,7 @@ class HuiController(tk.Tk):
 
      def create_choice(self, page_name, data):
         self.frames[page_name] = choice(parent=self.container, controller=self, data=data)
-        self.frames[page_name].grid(row=0, column= 0, sticky= "nsew")
+        self.frames[page_name].grid(row=0, column= 0) #sticky= "nsew"
 
      def give_bool(self, val):
         self.tmp = val
