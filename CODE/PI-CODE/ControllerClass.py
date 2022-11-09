@@ -3,6 +3,7 @@ from tkinter import font as tkfont
 import cv2 as cv
 import serial
 from pyzbar.pyzbar import decode
+
 class PiController():
     def __init__(self, Hui):
         self.HUI = Hui
@@ -98,13 +99,13 @@ class PiController():
 class HuiController(tk.Tk):
      def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
-        
+        self.geometry("500x500")
         self.tmp = None
         self.mm_bool = None
         self.mm_send_bool = None
 
         self.container = tk.Frame(self)
-        self.container.pack(side="top", fill="both", expand=True)
+        self.container.grid(row=1, column =1, side="top", fill="both", expand=True)
         self.container.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
 
