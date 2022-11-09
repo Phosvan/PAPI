@@ -29,9 +29,9 @@ curl --silent $str3 | md5sum > "$str33.md5new"
 #curl --silent https://raw.githubusercontent.com/Phosvan/PAPI/main/CODE/PI-CODE/Controller.py | md5sum > asdfasdf
 
 
-md5sum $str11 >> "$str11.md5"
-md5sum $str22 >> "$str22.md5"
-md5sum $str33 >> "$str33.md5"
+md5sum $str11 > "$str11.md5"
+md5sum $str22 > "$str22.md5"
+md5sum $str33 > "$str33.md5"
 
 if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str11"
