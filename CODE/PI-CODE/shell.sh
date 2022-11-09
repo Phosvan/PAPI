@@ -13,7 +13,7 @@ str33="shell.sh"
 str4="https://raw.githubusercontent.com/Phosvan/PAPI/main/CODE/PI-CODE/Controller*"
 
 
-SERVICE = python3
+SERVICE="python3"
 
 curl --silent $str1 | md5sum > "$str11.md5"
 curl --silent $str2 | md5sum > "$str22.md5"
