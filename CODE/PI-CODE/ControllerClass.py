@@ -170,7 +170,7 @@ class manual(tk.Frame):
         for i in range(10):
             entrys.append(Options(self))
 
-        button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 20), fg= "",
+        button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_send_bool(True))
         button1.grid(row=4, columnspan = 4, pady=5) #side= "right", fill= "x",
         button2 = tk.Button(self, text= "Cancel", font= ("Copper Black", 20), fg= "green",
