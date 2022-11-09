@@ -50,8 +50,8 @@ if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str22"
     sudo rm -r ControllerClass.py
     wget -q $str2
-    rm "$str33.md5new"
-	rm "$str33.md5"
+    rm -r "$str33.md5new"
+	rm -r "$str33.md5"
 else
 printf "up to date "
 rm -r "$str22.md5new"
