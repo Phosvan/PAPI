@@ -43,7 +43,7 @@ rm "$str22.md5new"
 curl --silent $str3 | md5sum > "$str33.md5new"
 if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str33"
-    sudo rm -r shell.sh
+    sudo rm -r $str33
     wget $str3
     chmod +x $str33
 fi
