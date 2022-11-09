@@ -43,10 +43,10 @@ else
 printf "up to date "
 rm "$str11.md5new"
 rm "$str11.md5"
+fi
 
 
-
-elif ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
+if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str22"
     sudo rm -r ControllerClass.py
     wget -q $str2
@@ -54,9 +54,9 @@ else
 printf "up to date "
 rm "$str22.md5new"
 rm "$str22.md5"
+fi
 
-
-elif ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
+if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str33"
     sudo rm -r $str33
     wget -q $str3
@@ -65,9 +65,9 @@ else
 printf "up to date "
 rm "$str33.md5new"
 rm "$str33.md5"
+fi
 
-
-elif pgrep -x "$SERVICE" >/dev/null
+#elif pgrep -x "$SERVICE" >/dev/null
 #then
 
 #else
