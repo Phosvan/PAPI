@@ -105,7 +105,7 @@ class HuiController(tk.Tk):
         self.mm_send_bool = None
 
         self.container = tk.Frame(self)
-        self.container.grid(row=1, column =1, side="top", fill="both", expand=True)
+        self.container.grid(row=1, column =1, expand=True)
         self.container.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
 
@@ -159,7 +159,7 @@ class Options():
         drop_menu = tk.OptionMenu(parent, userSelect, *Options.options)
         drop_menu.pack(side= "bottom", pady=5)
         amount = tk.Spinbox(parent, from_=0, to=30)
-        amount.pack(side= "bottom", pady=5)
+        amount.grid(row=1, column=1, side= "bottom", pady=5)
 
 
 class manual(tk.Frame):
@@ -171,12 +171,12 @@ class manual(tk.Frame):
         for i in range(10):
             entrys.append(Options(self))
 
-        button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 20), fg= "green",
+        button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 20), fg= "#FEC923",
         command= lambda: controller.give_mm_send_bool(True))
-        button1.pack(side= "right", fill= "x", pady=5)
+        button1.grid(row=4, columnspan = 4, pady=5) #side= "right", fill= "x",
         button2 = tk.Button(self, text= "Cancel", font= ("Copper Black", 20), fg= "green",
         command= lambda: controller.give_mm_send_bool(False))
-        button2.pack(side= "right", fill= "x", pady=5)
+        button2.grid(row=5, columnspan = 4, pady=5) #side= "right", fill= "x",
 
 class start(tk.Frame):
     def __init__(self, parent, controller):
