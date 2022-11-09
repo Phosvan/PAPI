@@ -15,51 +15,69 @@ str4="https://raw.githubusercontent.com/Phosvan/PAPI/main/CODE/PI-CODE/Controlle
 
 SERVICE="python3"
 
-curl --silent $str1 | md5sum > "$str11.md5"
-curl --silent $str2 | md5sum > "$str22.md5"
-curl --silent $str3 | md5sum > "$str33.md5"
-curl --silent $str4 | md5sum > "$str44.md5"
-#curl --silent $str5 | md5sum > "$str1.md5"
 
 curl --silent $str1 | md5sum > "$str11.md5new"
+curl --silent $str2 | md5sum > "$str22.md5new"
+curl --silent $str3 | md5sum > "$str33.md5new"
 
+
+#curl --silent https://raw.githubusercontent.com/Phosvan/PAPI/main/CODE/PI-CODE/Controller.py | md5sum > asdfasdf
+
+
+md5sum $str11 > "$str11.md5"
+md5sum $str22 > "$str22.md5"
+md5sum $str33 > "$str33.md5"
 
 if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str11"
     sudo rm -r Controller.py
-    wget $str1
-    sudo pkill -f $str11
-    sudo python3 /home/pi/Documents/Controller.py
-fi
-rm "$str11.md5new"
-rm "$str11.md5"
+    wget -q $str1
 
-curl --silent $str2 | md5sum > "$str22.md5new"
+    rm -r "$str33.md5new"
+	rm -r "$str33.md5"
+
+    sudo pkill -9 -f $str11
+    sudo python3 /home/pi/Documents/Controller.py
+
+else
+printf "up to date "
+rm -r "$str11.md5new"
+rm -r "$str11.md5"
+fi
+
+
 if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str22"
     sudo rm -r ControllerClass.py
-    wget $str2
+    wget -q $str2
+    rm -r "$str33.md5new"
+	rm -r "$str33.md5"
+else
+printf "up to date "
+rm -r "$str22.md5new"
+rm -r "$str22.md5"
 fi
-rm "$str22.md5new"
-rm "$str22.md5"
 
-curl --silent $str3 | md5sum > "$str33.md5new"
 if ! cmp "$str33.md5" "$str33.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str33"
+    printf "$str33.md5 $str33.md5new"
     sudo rm -r $str33
-    wget $str3
+    wget -q $str3
     chmod +x $str33
-fi
-rm "$str33.md5new"
-rm "$str33.md5"
-
-if pgrep -x "$SERVICE" >/dev/null
-then
-    echo "$SERVICE is running"
+	rm -r "$str33.md5new"
+	rm -r "$str33.md5"
 else
-    echo "$SERVICE stopped"
-
+printf "up to date "
+rm -r "$str33.md5new"
+rm -r "$str33.md5"
 fi
+
+#elif pgrep -x "$SERVICE" >/dev/null
+#then
+
+#else
+
+#fi
 
 
 
