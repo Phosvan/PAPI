@@ -32,6 +32,16 @@ md5sum $str11 > "$str11.md5"
 md5sum $str22 > "$str22.md5"
 md5sum $str33 > "$str33.md5"
 
+printf "$str11.md5"
+printf "$str22.md5"
+printf "$str33.md5"
+
+printf "$str11.md5new"
+printf "$str22.md5new"
+printf "$str33.md5new"
+
+
+
 if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str11"
     sudo rm -r Controller.py
@@ -84,6 +94,14 @@ fi
 #fi
 
 
+
+#for KIRA
+
+#sudo pkill -9 -f Controller.py
+
+ssh pi@pi.local
+
+password pi
 
 
 
