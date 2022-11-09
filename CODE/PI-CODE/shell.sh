@@ -15,14 +15,16 @@ str4="https://raw.githubusercontent.com/Phosvan/PAPI/main/CODE/PI-CODE/Controlle
 
 SERVICE="python3"
 
-curl --silent $str1 | md5sum > "$str11.md5"
-curl --silent $str2 | md5sum > "$str22.md5"
-curl --silent $str3 | md5sum > "$str33.md5"
-curl --silent $str4 | md5sum > "$str44.md5"
+curl --silent $str1 | md5sum > "$str11.md5new"
+curl --silent $str2 | md5sum > "$str22.md5new"
+curl --silent $str3 | md5sum > "$str33.md5new"
+curl --silent $str4 | md5sum > "$str44.md5new"
 #curl --silent $str5 | md5sum > "$str1.md5"
 
-curl --silent $str1 | md5sum > "$str11.md5new"
-
+md5sum > "$str11.md5"
+md5sum > "$str22.md5"
+md5sum > "$str33.md5"
+md5sum > "$str44.md5"
 
 if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     printf "%s has changed from baseline!\n" "$str11"
@@ -32,8 +34,8 @@ if ! cmp "$str11.md5" "$str11.md5new" > /dev/null; then
     sudo python3 /home/pi/Documents/Controller.py
 fi
 printf "up to date "
-#rm "$str11.md5new"
-#rm "$str11.md5"
+rm "$str11.md5new"
+rm "$str11.md5"
 
 curl --silent $str2 | md5sum > "$str22.md5new"
 if ! cmp "$str22.md5" "$str22.md5new" > /dev/null; then
