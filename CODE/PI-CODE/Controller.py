@@ -56,8 +56,8 @@ def logic():
                 HUI.update()
 
             if HUI.tmp == True:
-                PI.speak('start')
-                while PI.listen() != "done":
+                PI.speak('y')
+                # while PI.listen() != "done":
                     print("done")
                     HUI.update()
                 

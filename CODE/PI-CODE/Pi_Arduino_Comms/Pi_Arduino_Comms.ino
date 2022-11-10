@@ -263,10 +263,10 @@ void loop(){
   serialParse();
 
   if (serialReceived){
-    if (Hopper::string_hash(serialRXArray) == Hopper::string_hash(yes_str)){
+    if (serialRXArray[0] == 'y'){
         hoppers[4].drop_pills(2);
         hoppers[6].drop_pills(3);
-        done();
+        // done();
     }
   }
   // // check_simulated();
