@@ -397,7 +397,7 @@ void check_simulated(){
 void hash_hoppers(){
   byte hash_ptr = 0;
   byte parsed_ptr = 3;
-  if (serialParsed && !manual_mode) {
+  if (serialParse) {
     for (int i = parsed_ptr; parsed_ptr < parsed_size-1; i++) {
       hashedHopperQRs[hash_ptr++] = Hopper::string_hash(parsedRXArray[parsed_ptr]);
       hashedHopperQRs[hash_ptr++] = atoi(parsedRXArray[parsed_ptr+1]);
@@ -406,15 +406,15 @@ void hash_hoppers(){
     }
     parsedHashed = true;
   }
-  else if (serialParsed && manual_mode){
-    for (int i = parsed_ptr-2; parsed_ptr < parsed_size-1; i++) {
-      hashedHopperQRs[hash_ptr++] = Hopper::string_hash(parsedRXArray[parsed_ptr]);
-      hashedHopperQRs[hash_ptr++] = atoi(parsedRXArray[parsed_ptr+1]);
-      hash_size+=2;
-      parsed_ptr+=2;    
-    }
-    parsedHashed=true;
-  }
+  // else if (serialParsed && manual_mode){
+  //   for (int i = parsed_ptr-2; parsed_ptr < parsed_size-1; i++) {
+  //     hashedHopperQRs[hash_ptr++] = Hopper::string_hash(parsedRXArray[parsed_ptr]);
+  //     hashedHopperQRs[hash_ptr++] = atoi(parsedRXArray[parsed_ptr+1]);
+  //     hash_size+=2;
+  //     parsed_ptr+=2;    
+  //   }
+  //   parsedHashed=true;
+  // }
 }
 
 //===============
@@ -422,7 +422,7 @@ void hash_hoppers(){
 void dispense_pills(){
   byte dispense_ptr = 0;
   
-  if (parsedHashed && !manual_mode){
+  if (parsedHashed){
     while (dispense_ptr < hash_size-1){
       if (hashedHopperQRs[dispense_ptr] == hoppers[0].qr_hash){
         hoppers[0].drop_pills(hashedHopperQRs[dispense_ptr+1]);
@@ -476,58 +476,58 @@ void dispense_pills(){
     }
     pills_dispensed = true;
   }
-  else if (parsedHashed && manual_mode){
-    while (dispense_ptr < hash_size-1){
-      if (hashedHopperQRs[dispense_ptr] == hoppers[0].hop_name_hash){
-        hoppers[0].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+  // else if (parsedHashed && manual_mode){
+  //   while (dispense_ptr < hash_size-1){
+  //     if (hashedHopperQRs[dispense_ptr] == hoppers[0].hop_name_hash){
+  //       hoppers[0].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+  //       dispense_ptr+=2;       
+  //     }
 
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[1].hop_name_hash){
-        hoppers[1].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+  //     else if(hashedHopperQRs[dispense_ptr] == hoppers[1].hop_name_hash){
+  //       hoppers[1].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+  //       dispense_ptr+=2;       
+  //     }
 
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[2].hop_name_hash){
-        hoppers[2].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+  //     else if(hashedHopperQRs[dispense_ptr] == hoppers[2].hop_name_hash){
+  //       hoppers[2].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+  //       dispense_ptr+=2;       
+  //     }
 
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[3].hop_name_hash){
-        hoppers[3].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+  //     else if(hashedHopperQRs[dispense_ptr] == hoppers[3].hop_name_hash){
+  //       hoppers[3].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+  //       dispense_ptr+=2;       
+  //     }
 
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[4].hop_name_hash){
-        hoppers[4].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+    //   else if(hashedHopperQRs[dispense_ptr] == hoppers[4].hop_name_hash){
+    //     hoppers[4].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+    //     dispense_ptr+=2;       
+    //   }
       
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[5].hop_name_hash){
-        hoppers[5].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+    //   else if(hashedHopperQRs[dispense_ptr] == hoppers[5].hop_name_hash){
+    //     hoppers[5].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+    //     dispense_ptr+=2;       
+    //   }
 
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[6].hop_name_hash){
-        hoppers[6].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+    //   else if(hashedHopperQRs[dispense_ptr] == hoppers[6].hop_name_hash){
+    //     hoppers[6].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+    //     dispense_ptr+=2;       
+    //   }
 
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[7].hop_name_hash){
-        hoppers[7].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+    //   else if(hashedHopperQRs[dispense_ptr] == hoppers[7].hop_name_hash){
+    //     hoppers[7].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+    //     dispense_ptr+=2;       
+    //   }
 
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[8].hop_name_hash){
-        hoppers[8].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
+    //   else if(hashedHopperQRs[dispense_ptr] == hoppers[8].hop_name_hash){
+    //     hoppers[8].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+    //     dispense_ptr+=2;       
+    //   }
 
-      else if(hashedHopperQRs[dispense_ptr] == hoppers[9].hop_name_hash){
-        hoppers[9].drop_pills(hashedHopperQRs[dispense_ptr+1]);
-        dispense_ptr+=2;       
-      }
-    }
+    //   else if(hashedHopperQRs[dispense_ptr] == hoppers[9].hop_name_hash){
+    //     hoppers[9].drop_pills(hashedHopperQRs[dispense_ptr+1]);
+    //     dispense_ptr+=2;       
+    //   }
+    // }
     dispensed = true;
   }  
 }
