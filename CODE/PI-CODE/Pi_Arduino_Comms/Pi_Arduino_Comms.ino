@@ -1,4 +1,3 @@
-#include <Stepper.h>
 #include <Servo.h>
 #define P 53
 #define M (int)pow(9, 9) + 9
@@ -7,6 +6,8 @@
 #define ir_drop -100
 #define turnSpeed 1300                                             
 #define turnStop 1500
+#define stepsPerRevolution 500
+
 
 
 class IrSensor{
@@ -137,9 +138,8 @@ Hopper hoppers[10] = {
   Hopper()
 };
 
+Servo gate;
 // Yellow step, Green direct
-Stepper hopper_stepper = Stepper(100, 14, 2);
-Stepper wrap_stepper = Stepper(100, 15, 13);
 
 char serialRXArray[charSize] = { 0 }; //Initialize a char array of size charSize
 char parsedRXArray[12][64] = { 0 };
@@ -155,17 +155,32 @@ bool pills_dispensed = false;
 bool manual_mode = false;
 char manual_hash[] = "simulated";
 
-bool calibrate = false;
-
 bool debug = false; // Prints shit to the pi for viewing
 bool check;
+
+bool calibration = true;
+
+const int hopperStepPin = 2;
+const int hopperDirPin = 14;
+
+const int wrapStepPin = 13;
+const int wrapDirPin = 15;
+
+bool gathered = false;
+bool packaged = false;
+bool dispensed = false;
+bool calibrated = false;
+
 //===============
 
 void setup() {
   pinMode(16, OUTPUT);
-  hopper_stepper.setSpeed(1000);
-  wrap_stepper.setSpeed(1000);
+  pinMode(hopperDirPin, OUTPUT);
+  pinMode(hopperStepPin, OUTPUT);
+  pinMode(wrapStepPin, OUTPUT);
+  pinMode(wrapDirPin, OUTPUT);
 
+  gate.attach(44);
 
   Serial.begin(9600);
   Serial.println("<Arduino is ready>");
@@ -216,50 +231,103 @@ void setup() {
   hoppers[9].set_qr(tiktakone_str);
 
   check = true;
+  digitalWrite(hopperDirPin, HIGH);
+  digitalWrite(wrapDirPin, HIGH);
 }
 
 //===============
 
-void loop() {
-  
-  // if (check){
-  //   stepper_logic();
-  //   check=false;
+void loop(){
+  // if (calibration){
+  //   if (!calibrated){
+  //   calibrate();
+  //   }
+  //   serialRead();
+  //   serialParse();
+  //   // check_simulated();
+  //   hash_hoppers();
+  //   dispense_pills();
+  //   gather_pills();
+
+  //   pull_package();
+    
+  //   // package();
+  //   // finish_package();
+  //   // delayMicroseconds(20000);
+  //   calibration = false;
+    
   // }
 
-  hopper_stepper.step(0);
-  wrap_stepper.step(0);
-
-
-
-//   serialRead();
-//   serialParse();
-//   hash_hoppers();
-//   dispense_pills();
-
-//   if (debug){
-//     replyToPython();
-//   }
-//   group_pills();
-//   wrap_pills();  
-//   done();
+  serialRead();
+  serialParse();
+  check_simulated();
+  hash_hoppers();
+  dispense_pills();
+  // gather_pills();
+  // pull_package();
+  // package();
+  // finish_package();
+  // delaymicroseconds(15000);
+  done();
 }
 
+// Printer is pin 33
 //===============
 
+void calibrate(){
+  // Spin motor slowly
+  digitalWrite(hopperDirPin, HIGH);   
+  for (int i = 0; i < 1; i++){
+    
+    for(int x = 0; x < 150; x++)
+    {
+      digitalWrite(hopperStepPin, HIGH);
+      delayMicroseconds(1000);
+      digitalWrite(hopperStepPin, LOW);
+      delayMicroseconds(1000);
+    }
+    delay(2000); // Wait a second   
+  }
+  
+  for (int i = 0; i < 4; i++){
+    
+    for(int x = 0; x < 1000; x++)
+    {
+      digitalWrite(hopperStepPin, HIGH);
+      delayMicroseconds(1000);
+      digitalWrite(hopperStepPin, LOW);
+      delayMicroseconds(1000);
+    }
+    delay(2000); // Wait a second    
+  }
+  digitalWrite(hopperDirPin, LOW);    
+  for(int x = 0; x < 4220; x++)
+  {
+    digitalWrite(hopperStepPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(hopperStepPin, LOW);
+    delayMicroseconds(1000);
+  }
 
-
-//===============
-
-void calibration(){
-  int count = 0;
+    // digitalWrite(hopperDirPin, HIGH);
+  digitalWrite(hopperDirPin, HIGH);
+  calibrated = true;
 }
 
-void stepper_logic() {
-  hopper_stepper.step(100);
-  wrap_stepper.step(100);
+void gather_pills(){
+  digitalWrite(wrapDirPin, LOW);
+  gate.write(170);
+  for(int x = 0; x < 17350; x++)
+  {
+    digitalWrite(wrapStepPin, HIGH);
+    delayMicroseconds(500);
+    digitalWrite(wrapStepPin, LOW);
+    delayMicroseconds(500);
+  }
+  gate.write(90);
+  delay(1000);
+  gathered = true;
 }
-
 //===============
 
 void serialRead() { //Based on code from: https://forum.arduino.cc/index.php?topic=288234.0
@@ -459,9 +527,42 @@ void dispense_pills(){
         dispense_ptr+=2;       
       }
     }
-    pills_dispensed = true;
+    dispensed = true;
+  }  
+}
+
+//===============
+
+void package(){
+  digitalWrite(17, HIGH);
+  delayMicroseconds(100);
+}
+
+void pull_package(){
+  // Spin motor slowly
+  digitalWrite(wrapDirPin, LOW);
+  for(int x = 0; x < 9600; x++)
+  {
+    digitalWrite(wrapStepPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(wrapStepPin, LOW);
+    delayMicroseconds(1000);
   }
-  
+  packaged = true;
+}
+
+//===============
+
+void finish_package(){
+    // Spin motor slowly
+  digitalWrite(wrapDirPin, LOW);
+  for(int x = 0; x < 10150; x++)
+  {
+    digitalWrite(wrapStepPin, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(wrapStepPin, LOW);
+    delayMicroseconds(1000);
+  }
 }
 
 //===============
@@ -478,7 +579,7 @@ void replyToPython() {
 }
 
 void done(){
-  if (pills_dispensed == true){
+  if (dispensed == true){
     Serial.print("<done>");
     serialReceived = false; //Do not adjust, flag used in processing logic
     serialParsed = false; // Sets after the RXArray get's parsed.
