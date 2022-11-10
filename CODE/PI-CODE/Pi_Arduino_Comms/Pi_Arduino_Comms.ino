@@ -266,6 +266,7 @@ void loop(){
     if (Hopper::string_hash(serialRXArray) == Hopper::string_hash(yes_str)){
         hoppers[4].drop_pills(2);
         hoppers[6].drop_pills(3);
+        done();
     }
   }
   // // check_simulated();
@@ -277,7 +278,6 @@ void loop(){
   // // finish_package();
   // // delaymicroseconds(15000);
   // replyToPython();
-  done();
 }
 
 // Printer is pin 33
