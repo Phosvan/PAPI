@@ -101,8 +101,8 @@ class HuiController(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         
         self.tmp = None
-        # self.mm_bool = None
-        # self.mm_send_bool = None
+        self.mm_bool = None
+        self.mm_send_bool = None
 
         self.container = tk.Frame(self)
         self.container.pack(side="top", fill="both", expand=True)
