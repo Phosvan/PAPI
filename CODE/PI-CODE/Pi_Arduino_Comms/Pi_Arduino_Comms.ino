@@ -260,7 +260,7 @@ void loop(){
 
   serialRead();
   serialParse();
-  check_simulated();
+  // check_simulated();
   hash_hoppers();
   dispense_pills();
   // gather_pills();
@@ -268,6 +268,7 @@ void loop(){
   // package();
   // finish_package();
   // delaymicroseconds(15000);
+  replyToPython();
   done();
 }
 

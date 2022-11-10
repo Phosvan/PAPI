@@ -112,8 +112,8 @@ class HuiController(tk.Tk):
         self.frames = {}
         self.frames['start'] = start(parent=self.container, controller=self)
         self.frames['start'].grid(row=0, column= 0, sticky= "nsew")
-        self.frames['manual'] = manual(parent=self.container, controller=self)
-        self.frames['manual'].grid(row=0,column=0,sticky="nsew")
+        # self.frames['manual'] = manual(parent=self.container, controller=self)
+        # self.frames['manual'].grid(row=0,column=0,sticky="nsew")
     
      def show_frame(self, page_name, data = None):
         '''Show a frame for the given page name'''
@@ -132,52 +132,52 @@ class HuiController(tk.Tk):
      def give_bool(self, val):
         self.tmp = val
     
-     def give_mm_bool(self, val):
-        self.mm_bool = val
+    #  def give_mm_bool(self, val):
+    #     self.mm_bool = val
 
-     def give_mm_send_bool(self, val):
-        self.mm_send_bool = val
+    #  def give_mm_send_bool(self, val):
+    #     self.mm_send_bool = val
     
         
-class Options():
+# class Options():
     
-    options=[
-    'hopone',
-    'hoptwo',
-    'hopthree',
-    'hopfour',
-    'hopfive',
-    'hopsix',
-    'hopseven',
-    'hopeight',
-    'hopnine',
-    'hopten',
-    ]
+#     options=[
+#     'hopone',
+#     'hoptwo',
+#     'hopthree',
+#     'hopfour',
+#     'hopfive',
+#     'hopsix',
+#     'hopseven',
+#     'hopeight',
+#     'hopnine',
+#     'hopten',
+#     ]
     
-    def __init__(self, parent):
-        userSelect = tk.StringVar()
-        userSelect.set(Options.options[0])
-        drop_menu = tk.OptionMenu(parent, userSelect, *Options.options)
-        drop_menu.pack( anchor=tk.NW)
-        amount = tk.Spinbox(parent, from_=0, to=30, font=(30))
-        amount.pack( anchor=tk.NE)
+#     def __init__(self, parent):
+#         userSelect = tk.StringVar()
+#         userSelect.set(Options.options[0])
+#         drop_menu = tk.OptionMenu(parent, userSelect, *Options.options)
+#         drop_menu.pack( anchor=tk.NW)
+#         amount = tk.Spinbox(parent, from_=0, to=30, font=(30))
+#         amount.pack( anchor=tk.NE)
 
 
-class manual(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, bg= "#d459de")
-        self.controller = controller
+# class manual(tk.Frame):
+#     def __init__(self, parent, controller):
+#         tk.Frame.__init__(self, parent, bg= "#d459de")
+#         self.controller = controller
 
-        entrys = []
-        for i in range(10):
-            entrys.append(Options(self))
+#         entrys = []
+#         for i in range(10):
+#             entrys.append(Options(self))
 
-        button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 17), fg= "green",
-        command= lambda: controller.give_mm_send_bool(True))
-        button1.pack(anchor=tk.N,  side='top')
-        button2 = tk.Button(self, text= "Cancel", font= ("Copper Black", 20), fg= "red",
-        command= lambda: controller.give_mm_send_bool(False))
-        button2.pack( anchor=tk.N,side='top')
+#         button1 = tk.Button(self, text= "Simulate Data", font= ("Copper Black", 17), fg= "green",
+#         command= lambda: controller.give_mm_send_bool(True))
+#         button1.pack(anchor=tk.N,  side='top')
+#         button2 = tk.Button(self, text= "Cancel", font= ("Copper Black", 20), fg= "red",
+#         command= lambda: controller.give_mm_send_bool(False))
+#         button2.pack( anchor=tk.N,side='top')
 
 class start(tk.Frame):
     def __init__(self, parent, controller):
@@ -209,13 +209,13 @@ class choice(tk.Frame):
         button3.pack(side= "bottom", fill= "x", pady=5)
 
 
-class yes(tk.Tk):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        self.controller = controller
+# class yes(tk.Tk):
+#     def __init__(self, parent, controller):
+#         tk.Frame.__init__(self, parent)
+#         self.controller = controller
      
-class mm(tk.Frame):
-     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent, bg= "#d459de")
-        self.controller = controller
-        #label1 = tk.Label
+# class mm(tk.Frame):
+#      def __init__(self, parent, controller):
+#         tk.Frame.__init__(self, parent, bg= "#d459de")
+#         self.controller = controller
+#         #label1 = tk.Label
