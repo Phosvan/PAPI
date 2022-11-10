@@ -166,10 +166,9 @@ const int hopperDirPin = 14;
 const int wrapStepPin = 13;
 const int wrapDirPin = 15;
 
-bool gathered = false;
-bool packaged = false;
+
 bool dispensed = false;
-bool calibrated = false;
+
 
 //===============
 
@@ -312,7 +311,6 @@ void calibrate(){
 
     // digitalWrite(hopperDirPin, HIGH);
   digitalWrite(hopperDirPin, HIGH);
-  calibrated = true;
 }
 
 void gather_pills(){
@@ -327,7 +325,6 @@ void gather_pills(){
   }
   gate.write(90);
   delay(1000);
-  gathered = true;
 }
 //===============
 
@@ -397,7 +394,7 @@ void check_simulated(){
 void hash_hoppers(){
   byte hash_ptr = 0;
   byte parsed_ptr = 3;
-  if (serialParse) {
+  if (serialParsed) {
     for (int i = parsed_ptr; parsed_ptr < parsed_size-1; i++) {
       hashedHopperQRs[hash_ptr++] = Hopper::string_hash(parsedRXArray[parsed_ptr]);
       hashedHopperQRs[hash_ptr++] = atoi(parsedRXArray[parsed_ptr+1]);
@@ -474,7 +471,7 @@ void dispense_pills(){
         dispense_ptr+=2;       
       }
     }
-    pills_dispensed = true;
+    dispensed = true;
   }
   // else if (parsedHashed && manual_mode){
   //   while (dispense_ptr < hash_size-1){
@@ -528,8 +525,8 @@ void dispense_pills(){
     //     dispense_ptr+=2;       
     //   }
     // }
-    dispensed = true;
-  }  
+  //   dispensed = true;
+  // }  
 }
 
 //===============
@@ -549,7 +546,7 @@ void pull_package(){
     digitalWrite(wrapStepPin, LOW);
     delayMicroseconds(1000);
   }
-  packaged = true;
+  
 }
 
 //===============
@@ -585,7 +582,7 @@ void done(){
     serialReceived = false; //Do not adjust, flag used in processing logic
     serialParsed = false; // Sets after the RXArray get's parsed.
     parsedHashed = false; // Sets after the parsedRXArray gets hashed.
-    pills_dispensed = false;
+    dispensed = false;
     parsed_size = 1;
     hash_size = 0;
     manual_mode = false;

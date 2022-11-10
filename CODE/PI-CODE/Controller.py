@@ -48,7 +48,7 @@ def logic():
             #     HUI.mm_send_bool = None
             #     HUI.update()
 
-        elif scan_input_data is not None:
+        if scan_input_data is not None:
             scan_input_data_tmp = scan_input_data.split(',')
             HUI.show_frame('choice', data=scan_input_data_tmp)
 
@@ -58,6 +58,7 @@ def logic():
             if HUI.tmp == True:
                 PI.speak(scan_input_data)
                 while PI.listen() != "done":
+                    print("done")
                     HUI.update()
                 
                 HUI.tmp = None
