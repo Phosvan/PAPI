@@ -75,8 +75,8 @@ class PiController():
             print("Camera On")
         while True:
             self.HUI.update()
-            if (self.HUI.mm_bool):
-                return "Manual"
+            # if (self.HUI.mm_bool):
+            #     return "Manual"
             
             ret, frame = self.vid.read()
             if ret == True:
