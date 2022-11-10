@@ -19,6 +19,7 @@ def logic():
         if scan_input_data is None:
             HUI.show_frame('start')
             scan_input_data = PI.scan_input()
+            PI.speak('y')
             HUI.update()
         
         # elif scan_input_data == "Manual":
