@@ -20,8 +20,8 @@ def logic():
             HUI.show_frame('start')
             scan_input_data = PI.scan_input()
             PI.speak('y')
-            HUI.update()
-        
+            
+        HUI.update()
         # elif scan_input_data == "Manual":
             
             # HUI.show_frame('manual')
@@ -49,30 +49,29 @@ def logic():
             #     HUI.mm_send_bool = None
             #     HUI.update()
 
-        if scan_input_data is not None:
-            scan_input_data_tmp = scan_input_data.split(',')
-            HUI.show_frame('choice', data=scan_input_data_tmp)
+        # if scan_input_data is not None:
+        #     scan_input_data_tmp = scan_input_data.split(',')
+        #     HUI.show_frame('choice', data=scan_input_data_tmp)
 
-            while HUI.tmp is None:
-                HUI.update()
+        #     while HUI.tmp is None:
+        #         HUI.update()
 
-            if HUI.tmp == True:
-                PI.speak('y')
-                # while PI.listen() != "done":
-                    print("done")
-                    HUI.update()
+        #     if HUI.tmp == True:
+        #         PI.speak('y')
+        #         # while PI.listen() != "done":
+        #         HUI.update()
                 
-                HUI.tmp = None
-                scan_input_data = None
+        #         HUI.tmp = None
+        #         scan_input_data = None
 
-                HUI.update()
+        #         HUI.update()
 
 
-            else:
-                scan_input_data = None
-                HUI.tmp = None
+            # else:
+            #     scan_input_data = None
+            #     HUI.tmp = None
 
-                HUI.update()
+            #     HUI.update()
 
 
 if __name__ == '__main__':
