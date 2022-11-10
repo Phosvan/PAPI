@@ -56,7 +56,7 @@ def logic():
                 HUI.update()
 
             if HUI.tmp == True:
-                PI.speak(scan_input_data)
+                PI.speak('start')
                 while PI.listen() != "done":
                     print("done")
                     HUI.update()

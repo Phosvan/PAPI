@@ -169,6 +169,8 @@ const int wrapDirPin = 15;
 
 bool dispensed = false;
 
+char yes_str[] = "start";
+
 
 //===============
 
@@ -259,15 +261,22 @@ void loop(){
 
   serialRead();
   serialParse();
-  // check_simulated();
-  hash_hoppers();
-  dispense_pills();
-  // gather_pills();
-  // pull_package();
-  // package();
-  // finish_package();
-  // delaymicroseconds(15000);
-  replyToPython();
+
+  if (serialReceived){
+    if (Hopper::string_hash(serialRXArray) == Hopper::string_hash(yes_str)){
+        hoppers[4].drop_pills(2);
+        hoppers[6].drop_pills(3);
+    }
+  }
+  // // check_simulated();
+  // hash_hoppers();
+  // dispense_pills();
+  // // gather_pills();
+  // // pull_package();
+  // // package();
+  // // finish_package();
+  // // delaymicroseconds(15000);
+  // replyToPython();
   done();
 }
 
